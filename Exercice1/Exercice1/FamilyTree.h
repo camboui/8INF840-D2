@@ -7,7 +7,10 @@ class FamilyTree
 {
 public:
 	FamilyTree();
+	FamilyTree(Person *familyMember);
 	~FamilyTree();
+
+	void addChild(Person *mother, Person *father, Person* child);
 
 	int		size();
 	void	descendantsInOrder(Person const& p);

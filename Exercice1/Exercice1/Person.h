@@ -3,12 +3,14 @@
 
 #include <iostream>
 #include "Color.h"
-
+using namespace std;
 
 class Person
 {
 public:
 	Person();
+	Person(string firstName, string lastName, int birthYear, int deathYear, Color color, Person*father, Person*mother, Person*brotherL, Person*brotherR, Person*child);
+	Person(string firstName, string lastName, int birthYear, int deathYear, Color color,Person*father, Person*mother);
 	~Person();
 
 
@@ -16,6 +18,7 @@ public:
 	std::string getFirstName()	{ return m_firstName;	};
 	std::string getLastName()	{ return m_lastName;	};
 	int			getBirthYear()	{ return m_birthYear;	};
+	int			getDeathYear()  { return m_deathYear;   };
 	Color		getEyesColor()	{ return m_eyesColor;	};
 	Person*		getFather()		{ return m_father;		};	
 	Person*		getMonther()	{ return m_mother;		};
@@ -27,6 +30,7 @@ public:
 	void setFirstName(std::string firstName)	{ m_firstName = firstName;	};
 	void setLastName(std::string lastName)		{ m_lastName = lastName;	};
 	void setBirthYear(int birthYear)			{ m_birthYear = birthYear;	};
+	void setBirthYear(int deathYear)            { m_deathYear = deathYear;  };
 	void setEyesColor(Color eyesColor)			{ m_eyesColor = eyesColor;	};
 	void setFather(Person* father)				{ m_father = father;		};
 	void setMonther(Person* mother)				{ m_mother = mother;		};
@@ -39,6 +43,7 @@ private:
 	std::string	m_firstName;
 	std::string m_lastName;
 	int			m_birthYear;
+	int			m_deathYear;
 	Color		m_eyesColor; 
 	Person*		m_father;
 	Person*		m_mother;
