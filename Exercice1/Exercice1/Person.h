@@ -2,7 +2,9 @@
 #define PERSON_H
 
 #include <iostream>
+#include <vector>
 #include "Color.h"
+
 using namespace std;
 
 class Person
@@ -12,7 +14,7 @@ public:
 	Person(string firstName, string lastName, int birthYear, int deathYear, Color color, Person*father, Person*mother, Person*brotherL, Person*brotherR, Person*child);
 	Person(string firstName, string lastName, int birthYear, int deathYear, Color color,Person*father, Person*mother);
 	~Person();
-
+	vector<Person*> getChildren();
 
 	//getter
 	std::string getFirstName()	{ return m_firstName;	};
@@ -21,10 +23,11 @@ public:
 	int			getDeathYear()  { return m_deathYear;   };
 	Color		getEyesColor()	{ return m_eyesColor;	};
 	Person*		getFather()		{ return m_father;		};	
-	Person*		getMonther()	{ return m_mother;		};
+	Person*		getMother()	{ return m_mother;		};
 	Person*		getBrotherL()	{ return m_brotherL;	};
 	Person*		getBrotherR()	{ return m_brotherR;	};
 	Person*		getChild()		{ return m_child;		};
+	
 
 	//setter
 	void setFirstName(std::string firstName)	{ m_firstName = firstName;	};
@@ -33,7 +36,7 @@ public:
 	void setBirthYear(int deathYear)            { m_deathYear = deathYear;  };
 	void setEyesColor(Color eyesColor)			{ m_eyesColor = eyesColor;	};
 	void setFather(Person* father)				{ m_father = father;		};
-	void setMonther(Person* mother)				{ m_mother = mother;		};
+	void setMother(Person* mother)				{ m_mother = mother;		};
 	void setBrotherL(Person* brotherL)			{ m_brotherL = brotherL;	};
 	void setBrotherR(Person* brotherR)			{ m_brotherR = brotherR;	};
 	void setChild(Person* child)				{ m_child = child;			};
