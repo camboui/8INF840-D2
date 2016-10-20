@@ -13,7 +13,6 @@ public:
 	void addChild(Person *motherTarget, Person *fatherTarger, Person* child);
 	void addChildMother(Person *mother, Person* child);
 	void addChildFather(Person *father, Person* child);
-	void addBrother(Person *brotherTarget, Person* toAdd);
 
 	void removePerson(Person *toRemove);
 	void removeFather(Person *target);
