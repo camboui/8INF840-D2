@@ -16,10 +16,9 @@ public:
 	void addBrother(Person *brotherTarget, Person* toAdd);
 
 	void removePerson(Person *toRemove);
-	void removeBrother(Person *toRemove);
-	void removeFather(Person *toRemove);
-	void removeMother(Person *toRemove);
-	void removeChild(Person *toRemove);
+	void removeFather(Person *target);
+	void removeMother(Person *target);
+	void removeChild(Person *target);
 
 
 

@@ -62,10 +62,10 @@ void FamilyTree::addBrother(Person *brotherTarget, Person* toAdd) {
 }
 
 void FamilyTree::removePerson(Person *toRemove){}
-void FamilyTree::removeBrother(Person *toRemove) {}
-void FamilyTree::removeFather(Person *toRemove){}
-void FamilyTree::removeMother(Person *toRemove){}
-void FamilyTree::removeChild(Person *toRemove) {}
+//removes link between target and father
+void FamilyTree::removeFather(Person *target){}
+void FamilyTree::removeMother(Person *target){}
+void FamilyTree::removeChild(Person *target) {}
 
 
 int	 FamilyTree::size() {}
