@@ -25,9 +25,41 @@ void FamilyTree::addChild(Person *motherTarget, Person *fatherTarget, Person* ch
 	//... useless
 }
 
-void addChild(Person *parentTarget, Person* child) {}
-void addParent(Person *parentTarget, Person* child) {}
-void addBrother(Person *brotherTarget, Person* toAdd) {}
+void FamilyTree::addChildMother(Person *mother, Person* child) {
+	child->setMother(mother);
+	if (mother->getChild() == nullptr) {
+		mother->setChild(child);
+	}
+	else {
+		//Une mère a un lien vers un seul fils, mais si ces fils ne sont pas du même père ?
+	}
+}
+
+void FamilyTree::addChildFather(Person *father, Person* child) {
+	child->setFather(father);
+	if (father->getChild() == nullptr) {
+		father->setChild(child);
+	}
+	else {
+		//Une père a un lien vers un seul fils, mais si ces fils ne sont pas de la même mère ?
+	}
+}
+
+
+
+void FamilyTree::addBrother(Person *brotherTarget, Person* toAdd) {
+	//set father and mothet
+	toAdd->setFather(brotherTarget->getFather());
+	toAdd->setMother(brotherTarget->getMother());
+
+	//insert toAdd between brotherTarget and brotherTarget->BrotherL
+	Person *leftBrother = brotherTarget->getBrotherL();
+	brotherTarget->setBrotherL(toAdd);
+
+	if (leftBrother != nullptr) {
+		toAdd->setBrotherL(leftBrother);
+	}
+}
 
 
 int	 FamilyTree::size() {}
