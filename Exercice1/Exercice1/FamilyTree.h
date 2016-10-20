@@ -10,8 +10,16 @@ public:
 	FamilyTree(Person *familyMember);
 	~FamilyTree();
 
-	void addChild(Person *mother, Person *father, Person* child);
 
+	void addChild(Person *motherTarget, Person *fatherTarget, Person* child);
+	void addChildMother(Person *mother, Person* child);
+	void addChildFather(Person *father, Person* child);
+	void removePerson(Person *toRemove);
+	void removeChild(Person *target);
+
+
+
+	Person* getFamilyMember() { return m_familyMember; };
 	int		size();
 	void	descendantsInOrder(Person const& p);
 	void	descendantsPreOrder(Person const& p);

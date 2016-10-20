@@ -11,10 +11,11 @@ class Person
 {
 public:
 	Person();
-	Person(string firstName, string lastName, int birthYear, int deathYear, Color color, Person*father, Person*mother, Person*brotherL, Person*brotherR, Person*child);
-	Person(string firstName, string lastName, int birthYear, int deathYear, Color color,Person*father, Person*mother);
+	Person(string firstName, string lastName, int birthYear, int deathYear, Color color, Person*father, Person*mother, vector<Person*> children);
+	Person(string firstName, string lastName, int birthYear, int deathYear, Color color, Person*father, Person*mother);
+	Person(string firstName, string lastName, int birthYear, int deathYear, Color color);
 	~Person();
-	vector<Person*> getChildren();
+	
 
 	//getter
 	std::string getFirstName()	{ return m_firstName;	};
@@ -23,10 +24,8 @@ public:
 	int			getDeathYear()  { return m_deathYear;   };
 	Color		getEyesColor()	{ return m_eyesColor;	};
 	Person*		getFather()		{ return m_father;		};	
-	Person*		getMother()	{ return m_mother;		};
-	Person*		getBrotherL()	{ return m_brotherL;	};
-	Person*		getBrotherR()	{ return m_brotherR;	};
-	Person*		getChild()		{ return m_child;		};
+	Person*		getMother()	    { return m_mother;		};
+	vector<Person*> getChildren() { return m_children;	};
 	
 
 	//setter
@@ -37,22 +36,18 @@ public:
 	void setEyesColor(Color eyesColor)			{ m_eyesColor = eyesColor;	};
 	void setFather(Person* father)				{ m_father = father;		};
 	void setMother(Person* mother)				{ m_mother = mother;		};
-	void setBrotherL(Person* brotherL)			{ m_brotherL = brotherL;	};
-	void setBrotherR(Person* brotherR)			{ m_brotherR = brotherR;	};
-	void setChild(Person* child)				{ m_child = child;			};
+	void setChildren(vector<Person*> children)  { m_children = children;	};
 
 
 private:
-	std::string	m_firstName;
-	std::string m_lastName;
-	int			m_birthYear;
-	int			m_deathYear;
-	Color		m_eyesColor; 
-	Person*		m_father;
-	Person*		m_mother;
-	Person*		m_brotherL;
-	Person*		m_brotherR;
-	Person*		m_child;
+	std::string	    m_firstName;
+	std::string     m_lastName;
+	int			    m_birthYear;
+	int			    m_deathYear;
+	Color		    m_eyesColor; 
+	Person*		    m_father;
+	Person*		    m_mother;
+	vector<Person*>	m_children;
 
 };
 
