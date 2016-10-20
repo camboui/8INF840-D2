@@ -16,13 +16,17 @@ Person::Person(string firstName, string lastName, int birthYear, int deathYear, 
 	Person*father, Person*mother): 
 	m_firstName(firstName), m_lastName(lastName), m_birthYear(birthYear), m_deathYear(deathYear),
 	m_eyesColor(color), m_father(father), m_mother(mother)
-{}
+{
+	setChildren(vector<Person*>());
+}
 
 
 Person::Person(string firstName, string lastName, int birthYear, int deathYear, Color color):
 	m_firstName(firstName), m_lastName(lastName), m_birthYear(birthYear), m_deathYear(deathYear),
 	m_eyesColor(color), m_father(nullptr), m_mother(nullptr)
-{}
+{
+	setChildren(vector<Person*>());
+}
 
 Person::~Person()
 {
