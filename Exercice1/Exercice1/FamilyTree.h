@@ -11,11 +11,16 @@ public:
 	~FamilyTree();
 
 	void addChild(Person *motherTarget, Person *fatherTarger, Person* child);
-	
-	void addChildMother(Person *parentTarget, Person* child);
-	void addChildFather(Person *parentTarget, Person* child);
-	void addParent(Person *parentTarget, Person* child);
+	void addChildMother(Person *mother, Person* child);
+	void addChildFather(Person *father, Person* child);
 	void addBrother(Person *brotherTarget, Person* toAdd);
+
+	void removePerson(Person *toRemove);
+	void removeBrother(Person *toRemove);
+	void removeFather(Person *toRemove);
+	void removeMother(Person *toRemove);
+	void removeChild(Person *toRemove);
+
 
 
 

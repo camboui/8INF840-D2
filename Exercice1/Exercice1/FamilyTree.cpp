@@ -48,7 +48,7 @@ void FamilyTree::addChildFather(Person *father, Person* child) {
 
 
 void FamilyTree::addBrother(Person *brotherTarget, Person* toAdd) {
-	//set father and mothet
+	//set father and mother
 	toAdd->setFather(brotherTarget->getFather());
 	toAdd->setMother(brotherTarget->getMother());
 
@@ -60,6 +60,12 @@ void FamilyTree::addBrother(Person *brotherTarget, Person* toAdd) {
 		toAdd->setBrotherL(leftBrother);
 	}
 }
+
+void FamilyTree::removePerson(Person *toRemove){}
+void FamilyTree::removeBrother(Person *toRemove) {}
+void FamilyTree::removeFather(Person *toRemove){}
+void FamilyTree::removeMother(Person *toRemove){}
+void FamilyTree::removeChild(Person *toRemove) {}
 
 
 int	 FamilyTree::size() {}
