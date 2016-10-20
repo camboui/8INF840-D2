@@ -14,16 +14,20 @@ FamilyTree::~FamilyTree()
 {
 }
 
-void FamilyTree::addChild(Person *mother, Person *father, Person* child) {
-	mother->setChild(child);
-	father->setChild(child);
+void FamilyTree::addChild(Person *motherTarget, Person *fatherTarget, Person* child) {
+	motherTarget->setChild(child);
+	fatherTarget->setChild(child);
 
-	child->setMother(mother);
-	vector<Person*> motherChildren = mother->getChildren();
-	vector<Person*> fatherChildren = father->getChildren();
+	child->setMother(motherTarget);
+	child->setFather(fatherTarget);
+	vector<Person*> motherChildren = motherTarget->getChildren();
+	vector<Person*> fatherChildren = fatherTarget->getChildren();
 	//... useless
 }
 
+void addChild(Person *parentTarget, Person* child) {}
+void addParent(Person *parentTarget, Person* child) {}
+void addBrother(Person *brotherTarget, Person* toAdd) {}
 
 
 int	 FamilyTree::size() {}

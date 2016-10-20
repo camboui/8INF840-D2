@@ -12,7 +12,8 @@ class Person
 public:
 	Person();
 	Person(string firstName, string lastName, int birthYear, int deathYear, Color color, Person*father, Person*mother, Person*brotherL, Person*brotherR, Person*child);
-	Person(string firstName, string lastName, int birthYear, int deathYear, Color color,Person*father, Person*mother);
+	Person(string firstName, string lastName, int birthYear, int deathYear, Color color, Person*father, Person*mother);
+	Person(string firstName, string lastName, int birthYear, int deathYear, Color color);
 	~Person();
 	vector<Person*> getChildren();
 

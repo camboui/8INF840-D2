@@ -10,7 +10,12 @@ public:
 	FamilyTree(Person *familyMember);
 	~FamilyTree();
 
-	void addChild(Person *mother, Person *father, Person* child);
+	void addChild(Person *motherTarget, Person *fatherTarger, Person* child);
+	void addChild(Person *parentTarget, Person* child);
+	void addParent(Person *parentTarget, Person* child);
+	void addBrother(Person *brotherTarget, Person* toAdd);
+
+
 
 	int		size();
 	void	descendantsInOrder(Person const& p);
