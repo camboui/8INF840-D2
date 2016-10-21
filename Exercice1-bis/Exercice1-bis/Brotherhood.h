@@ -2,13 +2,14 @@
 #define BROTHERHOOD_H
 
 #include <vector>
-
-
+class Couple;
 class Person;
 class Brotherhood
 {
 public:
-	Brotherhood(std::vector<Person*> brotherhood);
+	Brotherhood();
+	Brotherhood(Person* firstChild);
+	Brotherhood(Person* firstChild, Couple* parents);
 	~Brotherhood();
 	void add(Person* child) { m_brotherhood.push_back(child); };
 	int size() { return (int) m_brotherhood.size(); };

@@ -17,9 +17,16 @@ public:
 	void setWoman(Person* woman) { m_woman = woman; };
 	void addChildren(Person* child) { m_children->add(child); };
 	int numberOfChildren() { return m_children->size(); };
+	bool isSameAs(Couple c) {
+		return	((m_man == c.getMan())
+			&& (m_woman == c.getWoman()));
+	}
 private:
 	Person* m_man;
 	Person* m_woman;
 	Brotherhood* m_children;
 };
+
+
+
 #endif

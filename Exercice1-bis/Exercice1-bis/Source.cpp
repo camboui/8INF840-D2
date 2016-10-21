@@ -12,9 +12,9 @@ int main(void) {
 	Person jeanneMarie = Person("jeanne", "marie", 1900, EyesColor::AMBER);
 	Couple coupleJeanJeanne = Couple(&jeanPatrick, &jeanPatrick);
 	Person quentinMace = Person("quentin", "mace", 1993, EyesColor::BROWN, &coupleJeanJeanne);
-	Person bob = Person("bob", "mace", 1993, EyesColor::BROWN, &coupleJeanJeanne);
+	Person bob = Person("bob", "mace", 1993, EyesColor::BROWN);
 
-	ftree.addFamilyMember(&bob);
+	ftree.addParentsToAChild(&bob, &jeanPatrick, &jeanneMarie);
 
 
 

@@ -17,6 +17,7 @@ public:
 	void	descendantsInOrder(Person const& p);
 	void	descendantsPreOrder(Person const& p);
 	void	descendantsPostOrder(Person const& p);
+	void addParentsToAChild(Person * child, Person * father, Person * mother);
 	void	addFamilyMember(Person* p);
 	void	whoHasEyesThatColor(EyesColor c);
 	void	ancestorsWhoHasEyesThatColor(EyesColor c);
