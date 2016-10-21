@@ -3,17 +3,20 @@
 
 #include <vector>
 
-#include "Person.h"
 
+class Person;
 class Brotherhood
 {
 public:
-	Brotherhood();
+	Brotherhood(std::vector<Person*> brotherhood);
 	~Brotherhood();
 	void add(Person* child) { m_brotherhood.push_back(child); };
-	void size() { m_brotherhood.size(); };
+	int size() { return (int) m_brotherhood.size(); };
+	Couple* getParents() { return m_parents; };
+	void setParents(Couple* parents) { m_parents = parents; };
 private:
 	std::vector<Person*> m_brotherhood;
+	Couple* m_parents;
 };
 
 #endif

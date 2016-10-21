@@ -154,7 +154,6 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="FamilyTree.h" />
     <ClInclude Include="Person.h" />
-    <ClInclude Include="Pile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

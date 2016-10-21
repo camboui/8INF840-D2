@@ -2,7 +2,7 @@
 
 
 
-Brotherhood::Brotherhood()
+Brotherhood::Brotherhood(std::vector<Person*> brotherhood):m_brotherhood(brotherhood)
 {
 }
 

@@ -14,4 +14,38 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Brotherhood.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Couple.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FamilyTree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Brotherhood.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Couple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EyesColor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FamilyTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Person.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

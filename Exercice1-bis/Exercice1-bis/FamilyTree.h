@@ -1,7 +1,7 @@
 #ifndef FAMILY_TREE_H
 #define FAMILY_TREE_H
 
-#include "Person.h";
+#include "Person.h"
 
 class FamilyTree
 {
