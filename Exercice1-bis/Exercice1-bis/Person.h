@@ -10,20 +10,12 @@
 class Person
 {
 public:
-	Person();
 	~Person();
 	//constructor for a dead person
-	Person(std::string firstName, std::string lastName, int birthYear, int deathYear, EyesColor color, std::vector<Couple*> couplesList, Brotherhood* brotherhood);
-	Person(std::string firstName, std::string lastName, int birthYear, int deathYear, EyesColor color, Brotherhood* brotherhood);
-	Person(std::string firstName, std::string lastName, int birthYear, int deathYear, EyesColor color, std::vector<Couple*> couplesList);
 	Person(std::string firstName, std::string lastName, int birthYear, int deathYear, EyesColor color);
-	Person(std::string firstName, std::string lastName, int birthYear, int deathYear, EyesColor color, Couple* parents);
+
 	//constructor for a live person
-	Person(std::string firstName, std::string lastName, int birthYear, EyesColor color, std::vector<Couple*> couplesList, Brotherhood* brotherhood);
-	Person(std::string firstName, std::string lastName, int birthYear, EyesColor color, Brotherhood* brotherhood);
-	Person(std::string firstName, std::string lastName, int birthYear, EyesColor color, std::vector<Couple*> couplesList);
 	Person(std::string firstName, std::string lastName, int birthYear, EyesColor color);
-	Person(std::string firstName, std::string lastName, int birthYear, EyesColor color, Couple* parents);
 
 	//getter
 	std::string getFirstName()				{ return m_firstName;	};
