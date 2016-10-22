@@ -27,6 +27,7 @@ public:
 	Person*		getFather()		{ return m_father;		};	
 	Person*		getMother()	    { return m_mother;		};
 	Person*		getBrother()    { return m_brother;     };
+	Person*		getChild()      { return m_child; };
 
 	
 
@@ -44,6 +45,7 @@ public:
 	void addBrother(Person* child);
 	void printInfo();
 	vector<Person*> getChildren();
+	vector<Person*> getBrothers();
 
 
 private:

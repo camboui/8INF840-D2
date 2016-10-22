@@ -13,8 +13,8 @@ FamilyTree::~FamilyTree()
 
 void FamilyTree::addChild(Person * motherTarget, Person * fatherTarget, Person * child)
 {
-	motherTarget->addChildToFather(child);
-	fatherTarget->addChildToMother(child);
+	fatherTarget->addChildToFather(child);
+	motherTarget->addChildToMother(child);
 }
 
 void FamilyTree::addChildToMother(Person * mother, Person * child)
