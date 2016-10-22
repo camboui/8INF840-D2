@@ -12,10 +12,11 @@ public:
 
 
 	void addChild(Person *motherTarget, Person *fatherTarget, Person* child);
-	void addChildMother(Person *mother, Person* child);
-	void addChildFather(Person *father, Person* child);
-	void removePerson(Person *toRemove);
-	void removeChild(Person *target);
+	void addChildToMother(Person *mother, Person* child);
+	void addChildToFather(Person *father, Person* child);
+	void addBrother(Person *target, Person* brother);
+	void addMother(Person *target, Person* mother);
+	void addFather(Person *target, Person* father);
 
 
 
@@ -24,7 +25,6 @@ public:
 	void	descendantsInOrder(Person const& p);
 	void	descendantsPreOrder(Person const& p);
 	void	descendantsPostOrder(Person const& p);
-	void	addFamilyMember(Person* p);
 	void	whoHasEyesThatColor(Color c);
 	void	ancestorsWhoHasEyesThatColor(Color c);
 	float	averageAge();
