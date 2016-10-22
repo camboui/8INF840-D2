@@ -25,28 +25,43 @@ void main(void)
 	Person *O = new Person("O", "_", 1917, 2000, Color::BROWN);
 
 
-
+	//    A    B    ?      C
+	//     \  /      \    /
+	//      D        {E  F}
+	//        \      /
+	//      G  {H  I}     J
+	//       \ /    \    /
+	//        K     {L M N}
+	//                /
+	//               O
 
 	FamilyTree ftree = FamilyTree(I);
 	ftree.addChildToFather(M, O);
 	ftree.addChild(I, J, M);
 	ftree.addBrother(M, N);
 	ftree.addBrother(M, L);
-
-
-	
-	
 	ftree.addChild(G, H, K);
 	ftree.addBrother(I, H);
 	ftree.addChild(D, E, I);
-	//
-	//ftree.addChildToFather(C, E);
-	//ftree.addBrother(E, F);
-	//
-	//ftree.addChild(A, B, D);
+	ftree.addChildToFather(C, E);
+	ftree.addBrother(E, F);
+	ftree.addChild(A, B, D);
 
-	I->printInfo();
-	H->printInfo();
-	K->printInfo();
+	//A->printInfo();
+	//B->printInfo();
+	//C->printInfo();
+	//D->printInfo();
+	//E->printInfo();
+	//F->printInfo();
+	//G->printInfo();
+	//H->printInfo();
+	//I->printInfo();
+	//J->printInfo();
+	//K->printInfo();
+	//L->printInfo();
+	//M->printInfo();
+	//N->printInfo();
+	//O->printInfo();
+
 	system("PAUSE");
 }

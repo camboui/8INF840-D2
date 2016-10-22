@@ -28,8 +28,14 @@ void Person::addChildToMother(Person * child)
 {
 	child->setMother(this);
 	if (this->m_child == nullptr) {
-		child->m_brother = child;
 		this->m_child = child;
+
+		//Update all brother's mother
+		Person*current = this->m_child;
+		while (current->m_brother != this->m_child) {
+			current = current->m_brother;
+			current->setMother(this);
+		}
 	}
 	else {
 		this->m_child->addBrother(child);
@@ -41,8 +47,14 @@ void Person::addChildToFather(Person * child)
 {
 	child->setFather(this);
 	if (this->m_child == nullptr) {
-		child->m_brother = child;
 		this->m_child = child;
+
+		//Update all brother's father
+		Person*current = this->m_child;
+		while (current->m_brother != this->m_child) {
+			current = current->m_brother;
+			current->setFather(this);
+		}
 	}
 	else {
 		this->m_child->addBrother(child);
