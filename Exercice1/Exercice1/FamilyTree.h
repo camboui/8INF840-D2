@@ -20,13 +20,13 @@ public:
 
 
 
-	Person* getFamilyMember() { return m_familyMember; };
+	Person* getFamilyMember() { return m_familyMember;};
 	int		size();
-	void	descendantsInOrder(Person const& p);
-	void	descendantsPreOrder(Person const& p);
-	void	descendantsPostOrder(Person const& p);
-	void	whoHasEyesThatColor(Color c);
-	void	ancestorsWhoHasEyesThatColor(Color c);
+	vector<Person*>	descendantsInOrder(Person * p);
+	vector<Person*>	descendantsPreOrder(Person * p);
+	vector<Person*>	descendantsPostOrder(Person * p);
+	vector<Person*>	whoHasEyesThatColor(Color c);
+	vector<Person*>	ancestorsWhoHasEyesThatColor(Person * p, Color c);
 	float	averageAge();
 
 private:

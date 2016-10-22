@@ -5,6 +5,7 @@
 #include "Person.h"
 
 using namespace std;
+void printVector(vector <Person*> p, string vectorName);
 
 void main(void)
 {
@@ -47,13 +48,32 @@ void main(void)
 	ftree.addBrother(E, F);
 	ftree.addChild(A, B, D);
 
+
+	
+	cout << "Count members :" << ftree.size() << endl;
+	cout << "Average age : " << ftree.averageAge() << endl;
+
+	vector<Person*>	d = ftree.descendantsInOrder(A);
+	d = ftree.descendantsPreOrder(A);
+	printVector(d, "descendantsPreOrder");
+
+	d = ftree.descendantsPostOrder(A);
+	printVector(d, "descendantsPostOrder");
+
+	d = ftree.whoHasEyesThatColor(Color::BLUE);
+	printVector(d, "whoHasEyesThatColor");
+
+	d = ftree.ancestorsWhoHasEyesThatColor(A, Color::BLUE);
+	printVector(d, "ancestorsWhoHasEyesThatColor");
+	
+
 	//A->printInfo();
 	//B->printInfo();
 	//C->printInfo();
 	//D->printInfo();
 	//E->printInfo();
 	//F->printInfo();
-	//G->printInfo();
+	I->printInfo();
 	//H->printInfo();
 	//I->printInfo();
 	//J->printInfo();
@@ -64,4 +84,15 @@ void main(void)
 	//O->printInfo();
 
 	system("PAUSE");
+}
+
+void printVector(vector <Person*> p, string vectorName)
+{
+	cout << endl << vectorName.c_str()<< " :";
+	for (unsigned int i = 0; i < p.size(); i++)
+	{
+		cout << p[i]->getFirstName().c_str() << " - ";
+	}
+	cout << endl;
+
 }

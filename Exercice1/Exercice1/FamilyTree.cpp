@@ -47,25 +47,31 @@ int FamilyTree::size()
 	return 0;
 }
 
-void FamilyTree::descendantsInOrder(Person const & p)
+vector<Person*> FamilyTree::descendantsInOrder(Person * p)
 {
+	return vector<Person*>();
 }
 
-void FamilyTree::descendantsPreOrder(Person const & p)
+vector<Person*> FamilyTree::descendantsPreOrder(Person * p)
 {
+	return vector<Person*>();
 }
 
-void FamilyTree::descendantsPostOrder(Person const & p)
+vector<Person*> FamilyTree::descendantsPostOrder(Person * p)
 {
+	return vector<Person*>();
 }
 
-void FamilyTree::whoHasEyesThatColor(Color c)
+vector<Person*> FamilyTree::whoHasEyesThatColor(Color c)
 {
+	return vector<Person*>();
 }
 
-void FamilyTree::ancestorsWhoHasEyesThatColor(Color c)
+vector<Person*> FamilyTree::ancestorsWhoHasEyesThatColor(Person * p, Color c)
 {
+	return vector<Person*>();
 }
+
 
 float FamilyTree::averageAge()
 {
