@@ -24,8 +24,9 @@ void main(void)
 	Person *M = new Person("M", "_", 1917, 2000, Color::GRAY);
 	Person *N = new Person("N", "_", 1917, 2000, Color::HAZEL);
 	Person *O = new Person("O", "_", 1917, 2000, Color::BROWN);
+	vector<Person*> people{A,B,C,D,E,F,G,H,I,J,K,L,M,N,O};
 
-
+	// In order search impossible 
 	//    A    B    ?      C
 	//     \  /      \    /
 	//      D        {E  F}
@@ -49,40 +50,33 @@ void main(void)
 	ftree.addChild(A, B, D);
 
 
-	
-	cout << "FamilyTree size :" << ftree.size() << endl;
-	cout << "Average age : " << ftree.averageAge() << endl;
+	//for (int i = 0; i < people.size(); i++) {
+	//	people[i]->printInfo();
+	//}
 
-	vector<Person*>	d = ftree.descendantsInOrder(A);
-	d = ftree.descendantsPreOrder(A);
-	printVector(d, "descendantsPreOrder");
+	for (int i = 0; i < people.size(); i++) {
+		cout << "numberOfPersonsInFamily "<< people[i]->getFirstName().c_str() 
+			<< " " << people[i]->numberOfPersonsInFamily() << endl;
+	}
 
-	d = ftree.descendantsPostOrder(A);
-	printVector(d, "descendantsPostOrder");
 
-	d = ftree.whoHasEyesThatColor(Color::BLUE);
-	printVector(d, "whoHasEyesThatColor");
 
-	d = ftree.ancestorsWhoHasEyesThatColor(A, Color::BLUE);
-	printVector(d, "ancestorsWhoHasEyesThatColor");
-	
-	cout << endl << ftree.getFamilyMember()->numberOfPersonsInFamily() << endl;
-
-	//A->printInfo();
-	//B->printInfo();
-	//C->printInfo();
-	//D->printInfo();
-	//E->printInfo();
-	//F->printInfo();
-	//I->printInfo();
-	//H->printInfo();
-	//I->printInfo();
-	//J->printInfo();
-	//K->printInfo();
-	//L->printInfo();
-	//M->printInfo();
-	//N->printInfo();
-	//O->printInfo();
+	//cout << "Average age : " << ftree.averageAge() << endl;
+	//
+	//vector<Person*>	d = ftree.descendantsInOrder(A);
+	//d = ftree.descendantsPreOrder(A);
+	//printVector(d, "descendantsPreOrder");
+	//
+	//d = ftree.descendantsPostOrder(A);
+	//printVector(d, "descendantsPostOrder");
+	//
+	//d = ftree.whoHasEyesThatColor(Color::BLUE);
+	//printVector(d, "whoHasEyesThatColor");
+	//
+	//d = ftree.ancestorsWhoHasEyesThatColor(A, Color::BLUE);
+	//printVector(d, "ancestorsWhoHasEyesThatColor");
+	//
+	//cout << endl << ftree.getFamilyMember()->numberOfPersonsInFamily() << endl;
 
 	system("PAUSE");
 }
