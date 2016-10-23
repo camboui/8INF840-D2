@@ -86,7 +86,17 @@ vector<Person*> FamilyTree::ancestorsWhoHasEyesThatColor(Person * p, Color c)
 
 float FamilyTree::averageAge()
 {
-	return 0.0f;
+	vector<Person*> allFamily = this->getFamilyMember()->peopleInFamily();
+	float sum = 0;
+	for (vector<Person*>::iterator it = allFamily.begin(); it != allFamily.end(); ++it) {
+		if ((*it)->getDeathYear() != numeric_limits<int>::max())
+			sum+= 2017 - (*it)->getBirthYear();
+		else
+			sum += (*it)->getDeathYear() - (*it)->getBirthYear();
+
+	}
+
+	return sum/allFamily.size();
 }
 
 

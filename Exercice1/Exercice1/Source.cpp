@@ -82,7 +82,7 @@ void main(void)
 
 
 
-	//cout << "Average age : " << ftree.averageAge() << endl;
+	cout << endl  << "Average age : " << ftree.averageAge() << endl;
 	//
 	//vector<Person*>	d = ftree.descendantsInOrder(A);
 	//d = ftree.descendantsPreOrder(A);

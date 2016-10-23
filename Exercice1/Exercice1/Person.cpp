@@ -1,5 +1,6 @@
 #include "Person.h"
 
+#include <limits>
 #include <iostream>
 using namespace std;
 
@@ -21,6 +22,7 @@ Person::Person(string firstName, string lastName, int birthYear, Color color):
 	m_child = nullptr;
 	m_mother = nullptr;
 	m_father = nullptr;
+	m_deathYear= numeric_limits<int>::max();
 }
 
 
