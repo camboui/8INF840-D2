@@ -54,9 +54,30 @@ void main(void)
 	//	people[i]->printInfo();
 	//}
 
-	for (int i = 0; i < people.size(); i++) {
+	//According to blood relationship
+	for (unsigned int i = 0; i < people.size(); i++) {
 		cout << "numberOfPersonsInFamily "<< people[i]->getFirstName().c_str() 
 			<< " " << people[i]->numberOfPersonsInFamily() << endl;
+	}
+
+	for (unsigned int i = 0; i < people.size(); i++) {
+		vector<Person*> temp = people[i]->peopleInFamily();
+
+		cout << endl << "peopleInFamily (" << people[i]->getFirstName().c_str() << "): ";
+		for (unsigned int j = 0; j < temp.size(); j++) {
+			cout << temp[j]->getFirstName().c_str() << " - ";
+		}
+	}
+
+	//look at eye colors
+    vector<string> names = { "AMBER","BLUE","BROWN","GRAY","GREEN","HAZEL" };
+	for (unsigned int i = Color::AMBER; i < Color::HAZEL; i++) {
+		vector<Person*> temp = ftree.whoHasEyesThatColor(Color(i));
+
+		cout << endl << "whoHasEyesThatColor (" << names[i].c_str() << "): ";
+		for (unsigned int j = 0; j < temp.size(); j++) {
+			cout << temp[j]->getFirstName().c_str() << " - ";
+		}
 	}
 
 
@@ -89,5 +110,4 @@ void printVector(vector <Person*> p, string vectorName)
 		cout << p[i]->getFirstName().c_str() << " - ";
 	}
 	cout << endl;
-
 }

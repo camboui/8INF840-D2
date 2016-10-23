@@ -149,7 +149,7 @@ int Person::sizeLower()
 {
 	int size = 0;
 	std::vector<Person*> children = getChildren();
-	for (int i = 0; i < children.size(); i++)
+	for (unsigned int i = 0; i < children.size(); i++)
 	{
 		int sizeI = 1 + children[i]->sizeLower();
 		if (sizeI >= size) {
@@ -159,6 +159,7 @@ int Person::sizeLower()
 	return size;
 }
 
+//According to blood relationship
 int Person::numberOfPersonsInFamily()
 {
 	int nbPersUp(0);
@@ -182,7 +183,7 @@ int Person::numberOfPersonsInFamilyUpper() {
 		}
 		std::vector<Person*> bros = getBrothers();
 		nbPersUp += bros.size();
-		for (int i = 0; i < bros.size(); i++) {
+		for (unsigned int i = 0; i < bros.size(); i++) {
 			nbPersUp += bros[i]->numberOfPersonsInFamilyLower();
 		}
 	}
@@ -196,9 +197,66 @@ int Person::numberOfPersonsInFamilyLower() {
 	if (this != nullptr) {
 		std::vector<Person*> children = getChildren();
 		nbChildren = children.size();
-		for (int i = 0; i < children.size(); i++) {
+		for (unsigned int i = 0; i < children.size(); i++) {
 			nbPersLowMyChildren += children[i]->numberOfPersonsInFamilyLower();
 		}
 	}
 	return nbPersLowMyChildren + nbChildren;
+}
+
+
+
+//According to blood relationship
+vector<Person*> Person::peopleInFamily()
+{
+	vector<Person*> people;
+	people.push_back(this);
+
+	vector<Person*> temp1 = peopleInFamilyUpper();
+	people.insert(people.end(), temp1.begin(), temp1.end());
+	vector<Person*> temp2 = peopleInFamilyLower();
+	people.insert(people.end(), temp2.begin(), temp2.end());
+
+	return people;
+}
+
+vector<Person*> Person::peopleInFamilyUpper() {
+	//cout << "numberOfPersonsInFamilyUpper of " << m_firstName.c_str() << endl;
+	vector<Person*> people;
+	vector<Person*> temp;
+	if (this != nullptr) {
+		if (getMother() != nullptr) {
+			people.push_back(getMother());
+			temp = getMother()->peopleInFamilyUpper();
+			people.insert(people.end(), temp.begin(), temp.end());
+		}
+		if (getFather() != nullptr) {
+			people.push_back(getFather());
+			temp = getFather()->peopleInFamilyUpper();
+			people.insert(people.end(), temp.begin(), temp.end());
+		}
+		std::vector<Person*> bros = getBrothers();
+		for (unsigned int i = 0; i < bros.size(); i++) {
+			people.push_back(bros[i]);
+			temp = bros[i]->peopleInFamilyLower();
+			people.insert(people.end(), temp.begin(), temp.end());
+		}
+	}
+	
+	return people;
+}
+
+vector<Person*> Person::peopleInFamilyLower() {
+	//cout << "numberOfPersonsInFamilyLower of " << m_firstName.c_str() << endl;
+	vector<Person*> people;
+	vector<Person*> temp;
+	if (this != nullptr) {
+		std::vector<Person*> children = getChildren();
+		for (unsigned int i = 0; i < children.size(); i++) {
+			people.push_back(children[i]);
+			temp = children[i]->peopleInFamilyLower();
+			people.insert(people.end(), temp.begin(), temp.end());
+		}
+	}
+	return people;
 }
