@@ -126,3 +126,91 @@ vector<Person*> Person::getBrothers()
 	}
 	return brothers;
 }
+
+
+int Person::sizeUpper()
+{
+	int sizeUpperMother(0), sizeUpperFather(0);
+	if (getMother() != nullptr) {
+		sizeUpperMother = 1+getMother()->sizeUpper();
+	} 
+	if (getFather() != nullptr) {
+		sizeUpperFather = 1+getFather()->sizeUpper();
+	} 
+	if (sizeUpperFather > sizeUpperMother) {
+		return sizeUpperFather;
+	}
+	else {
+		return sizeUpperMother;
+	}
+}
+
+int Person::sizeLower()
+{
+	int size = 0;
+	std::vector<Person*> children = getChildren();
+	for (int i = 0; i < children.size(); i++)
+	{
+		int sizeI = 1 + children[i]->sizeLower();
+		if (sizeI > size) {
+			size = sizeI;
+		}
+	}
+	return size;
+}
+
+int Person::numberOfPersonsInFamily()
+{
+	int nbPersUp(0);
+	if (getFather() != nullptr) {
+		nbPersUp++;
+	}
+	if (getMother() != nullptr) {
+		nbPersUp++;
+	}
+	nbPersUp += getFather()->numberOfPersonsInFamilyUpper();
+	nbPersUp += getMother()->numberOfPersonsInFamilyUpper();
+	int nbPersLowMe = numberOfPersonsInFamilyLower();
+	std::vector<Person*> bros = getBrothers();
+	int nbPersLowBros(0);
+	for (int i = 0; i < bros.size(); i++) {
+		nbPersLowBros += bros[i]->numberOfPersonsInFamilyLower();
+	}
+	return nbPersUp;
+	//return 1 + nbPersUp + nbPersLowMe + nbPersLowBros + bros.size();
+}
+
+int Person::numberOfPersonsInFamilyUpper() {
+	//cout << "numberOfPersonsInFamilyUpper of " << m_firstName.c_str() << endl;
+	int nbPersUp(0);
+	if (this != nullptr) {
+		if (getMother() != nullptr) {
+			nbPersUp += getMother()->numberOfPersonsInFamilyUpper();
+			nbPersUp ++;
+		}
+		if (getFather() != nullptr) {
+			nbPersUp = getFather()->numberOfPersonsInFamilyUpper();
+			nbPersUp ++;
+		}
+		std::vector<Person*> bros = getBrothers();
+		nbPersUp += bros.size();
+		for (int i = 0; i < bros.size(); i++) {
+			nbPersUp += bros[i]->numberOfPersonsInFamilyLower();
+		}
+	}
+	return nbPersUp;
+}
+
+int Person::numberOfPersonsInFamilyLower() {
+	//cout << "numberOfPersonsInFamilyLower of " << m_firstName.c_str() << endl;
+	int nbPersLowMyChildren(0);
+	int nbChildren(0);
+	if (this != nullptr) {
+		std::vector<Person*> children = getChildren();
+		nbChildren = children.size();
+		for (int i = 0; i < children.size(); i++) {
+			nbPersLowMyChildren += children[i]->numberOfPersonsInFamilyLower();
+		}
+	}
+	return nbPersLowMyChildren + nbChildren;
+}

@@ -1,5 +1,5 @@
 #include "FamilyTree.h"
-
+#include <math.h>
 
 
 FamilyTree::FamilyTree()
@@ -44,7 +44,12 @@ void FamilyTree::addFather(Person * target, Person * father)
 
 int FamilyTree::size()
 {
-	return 0;
+	if (m_familyMember != nullptr) {
+		return 1 + m_familyMember->sizeLower() + m_familyMember->sizeUpper();
+	}
+	else {
+		return 0;
+	}
 }
 
 vector<Person*> FamilyTree::descendantsInOrder(Person * p)
@@ -77,6 +82,7 @@ float FamilyTree::averageAge()
 {
 	return 0.0f;
 }
+
 
 
 

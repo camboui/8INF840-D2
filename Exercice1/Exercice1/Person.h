@@ -46,6 +46,11 @@ public:
 	void printInfo();
 	vector<Person*> getChildren();
 	vector<Person*> getBrothers();
+	int sizeUpper();
+	int sizeLower();
+	int numberOfPersonsInFamily();
+
+	
 
 
 private:
@@ -58,6 +63,9 @@ private:
 	Person*		    m_mother;
 	Person*	        m_brother;
 	Person*	        m_child;
+
+	int numberOfPersonsInFamilyUpper();
+	int numberOfPersonsInFamilyLower();
 };
 
 #endif

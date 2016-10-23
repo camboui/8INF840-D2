@@ -50,7 +50,7 @@ void main(void)
 
 
 	
-	cout << "Count members :" << ftree.size() << endl;
+	cout << "FamilyTree size :" << ftree.size() << endl;
 	cout << "Average age : " << ftree.averageAge() << endl;
 
 	vector<Person*>	d = ftree.descendantsInOrder(A);
@@ -66,6 +66,7 @@ void main(void)
 	d = ftree.ancestorsWhoHasEyesThatColor(A, Color::BLUE);
 	printVector(d, "ancestorsWhoHasEyesThatColor");
 	
+	cout << endl << ftree.getFamilyMember()->numberOfPersonsInFamily() << endl;
 
 	//A->printInfo();
 	//B->printInfo();
@@ -73,7 +74,7 @@ void main(void)
 	//D->printInfo();
 	//E->printInfo();
 	//F->printInfo();
-	I->printInfo();
+	//I->printInfo();
 	//H->printInfo();
 	//I->printInfo();
 	//J->printInfo();
