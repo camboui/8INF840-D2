@@ -55,6 +55,8 @@ void main(void)
 	//	people[i]->printInfo();
 	//}
 
+	cout << "Tree size : " << ftree.size() << endl << endl;
+
 	//Show numberOfPersonsInFamily According to blood relationship
 	for (unsigned int i = 0; i < people.size(); i++) {
 		cout << "numberOfPersonsInFamily " << people[i]->getFirstName().c_str()
@@ -64,7 +66,7 @@ void main(void)
 
 	//Show peopleInFamily According to blood relationship PRE-ORDER
 	for (unsigned int i = 0; i < people.size(); i++) {
-		vector<Person*> temp = ftree.peopleInFamily(people[i],Order::PRE);
+		vector<Person*> temp = ftree.peopleInFamily(people[i], Order::PRE);
 		cout << "peopleInFamily (" << people[i]->getFirstName().c_str() << "): ";
 		for (unsigned int j = 0; j < temp.size(); j++) {
 			cout << temp[j]->getFirstName().c_str() << " - ";
