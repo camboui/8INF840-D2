@@ -1,6 +1,6 @@
 #include "FamilyTree.h"
 #include <math.h>
-
+#include <algorithm>
 
 FamilyTree::FamilyTree()
 {}
@@ -69,7 +69,13 @@ vector<Person*> FamilyTree::descendantsPostOrder(Person * p)
 
 vector<Person*> FamilyTree::whoHasEyesThatColor(Color c)
 {
-	return vector<Person*>();
+	vector<Person*> allFamily = this->getFamilyMember()->peopleInFamily();
+	vector<Person*> goodColor;
+	for (vector<Person*>::iterator it = allFamily.begin(); it != allFamily.end(); ++it) {
+		if ((*it)->getEyesColor() == c)
+			goodColor.push_back(*it);
+	}
+	return goodColor;
 }
 
 vector<Person*> FamilyTree::ancestorsWhoHasEyesThatColor(Person * p, Color c)
@@ -80,7 +86,17 @@ vector<Person*> FamilyTree::ancestorsWhoHasEyesThatColor(Person * p, Color c)
 
 float FamilyTree::averageAge()
 {
-	return 0.0f;
+	vector<Person*> allFamily = this->getFamilyMember()->peopleInFamily();
+	float sum = 0;
+	for (vector<Person*>::iterator it = allFamily.begin(); it != allFamily.end(); ++it) {
+		if ((*it)->getDeathYear() != numeric_limits<int>::max())
+			sum+= 2017 - (*it)->getBirthYear();
+		else
+			sum += (*it)->getDeathYear() - (*it)->getBirthYear();
+
+	}
+
+	return sum/allFamily.size();
 }
 
 

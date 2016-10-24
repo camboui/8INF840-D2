@@ -49,9 +49,7 @@ public:
 	int sizeUpper();
 	int sizeLower();
 	int numberOfPersonsInFamily();
-
-	
-
+	vector<Person*> peopleInFamily();
 
 private:
 	string	        m_firstName;
@@ -66,6 +64,9 @@ private:
 
 	int numberOfPersonsInFamilyUpper();
 	int numberOfPersonsInFamilyLower();
+
+	vector<Person*> peopleInFamilyUpper();
+	vector<Person*> peopleInFamilyLower();
 };
 
 #endif

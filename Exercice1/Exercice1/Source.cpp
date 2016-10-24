@@ -24,8 +24,9 @@ void main(void)
 	Person *M = new Person("M", "_", 1917, 2000, Color::GRAY);
 	Person *N = new Person("N", "_", 1917, 2000, Color::HAZEL);
 	Person *O = new Person("O", "_", 1917, 2000, Color::BROWN);
+	vector<Person*> people{A,B,C,D,E,F,G,H,I,J,K,L,M,N,O};
 
-
+	// In order search impossible 
 	//    A    B    ?      C
 	//     \  /      \    /
 	//      D        {E  F}
@@ -49,40 +50,54 @@ void main(void)
 	ftree.addChild(A, B, D);
 
 
-	
-	cout << "FamilyTree size :" << ftree.size() << endl;
-	cout << "Average age : " << ftree.averageAge() << endl;
+	//for (int i = 0; i < people.size(); i++) {
+	//	people[i]->printInfo();
+	//}
 
-	vector<Person*>	d = ftree.descendantsInOrder(A);
-	d = ftree.descendantsPreOrder(A);
-	printVector(d, "descendantsPreOrder");
+	//According to blood relationship
+	for (unsigned int i = 0; i < people.size(); i++) {
+		cout << "numberOfPersonsInFamily "<< people[i]->getFirstName().c_str() 
+			<< " " << people[i]->numberOfPersonsInFamily() << endl;
+	}
 
-	d = ftree.descendantsPostOrder(A);
-	printVector(d, "descendantsPostOrder");
+	for (unsigned int i = 0; i < people.size(); i++) {
+		vector<Person*> temp = people[i]->peopleInFamily();
 
-	d = ftree.whoHasEyesThatColor(Color::BLUE);
-	printVector(d, "whoHasEyesThatColor");
+		cout << endl << "peopleInFamily (" << people[i]->getFirstName().c_str() << "): ";
+		for (unsigned int j = 0; j < temp.size(); j++) {
+			cout << temp[j]->getFirstName().c_str() << " - ";
+		}
+	}
 
-	d = ftree.ancestorsWhoHasEyesThatColor(A, Color::BLUE);
-	printVector(d, "ancestorsWhoHasEyesThatColor");
-	
-	cout << endl << ftree.getFamilyMember()->numberOfPersonsInFamily() << endl;
+	//look at eye colors
+    vector<string> names = { "AMBER","BLUE","BROWN","GRAY","GREEN","HAZEL" };
+	for (unsigned int i = Color::AMBER; i < Color::HAZEL; i++) {
+		vector<Person*> temp = ftree.whoHasEyesThatColor(Color(i));
 
-	//A->printInfo();
-	//B->printInfo();
-	//C->printInfo();
-	//D->printInfo();
-	//E->printInfo();
-	//F->printInfo();
-	//I->printInfo();
-	//H->printInfo();
-	//I->printInfo();
-	//J->printInfo();
-	//K->printInfo();
-	//L->printInfo();
-	//M->printInfo();
-	//N->printInfo();
-	//O->printInfo();
+		cout << endl << "whoHasEyesThatColor (" << names[i].c_str() << "): ";
+		for (unsigned int j = 0; j < temp.size(); j++) {
+			cout << temp[j]->getFirstName().c_str() << " - ";
+		}
+	}
+
+
+
+	cout << endl  << "Average age : " << ftree.averageAge() << endl;
+	//
+	//vector<Person*>	d = ftree.descendantsInOrder(A);
+	//d = ftree.descendantsPreOrder(A);
+	//printVector(d, "descendantsPreOrder");
+	//
+	//d = ftree.descendantsPostOrder(A);
+	//printVector(d, "descendantsPostOrder");
+	//
+	//d = ftree.whoHasEyesThatColor(Color::BLUE);
+	//printVector(d, "whoHasEyesThatColor");
+	//
+	//d = ftree.ancestorsWhoHasEyesThatColor(A, Color::BLUE);
+	//printVector(d, "ancestorsWhoHasEyesThatColor");
+	//
+	//cout << endl << ftree.getFamilyMember()->numberOfPersonsInFamily() << endl;
 
 	system("PAUSE");
 }
@@ -95,5 +110,4 @@ void printVector(vector <Person*> p, string vectorName)
 		cout << p[i]->getFirstName().c_str() << " - ";
 	}
 	cout << endl;
-
 }
