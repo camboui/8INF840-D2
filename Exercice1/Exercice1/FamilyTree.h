@@ -19,16 +19,20 @@ public:
 	void addFather(Person *target, Person* father);
 
 
-
-	Person* getFamilyMember() { return m_familyMember;};
+	Person* getFamilyMember() { return m_familyMember; };
 	int		size();
-	vector<Person*>	descendantsInOrder(Person * p);
-	vector<Person*>	descendantsPreOrder(Person * p);
-	vector<Person*>	descendantsPostOrder(Person * p);
-	vector<Person*>	whoHasEyesThatColor(Color c);
-	vector<Person*>	ancestorsWhoHasEyesThatColor(Person * p, Color c);
-	float	averageAge();
-
+	//give the list of all Person in the family of p who has eye color c
+	vector<Person*>	whoHasEyesThatColor(Person * p, Color c, Order order);
+	//give the list of all Person in the ancestors of p who has eye color c
+	vector<Person*>	ancestorsWhoHasEyesThatColor(Person * p, Color c, Order order);
+	float	averageAge(Order order);
+	int numberOfPersonsInFamily(Person*p);
+	//give the list of all Person in the family of p
+	vector<Person*> peopleInFamily(Person*p, Order order);
+	//give the list of all ancestors in the family of p
+	vector<Person*> ancestors(Person * p, Order order);
+	//give the list of all descendants in the family of p
+	vector<Person*> descendants(Person*p, Order order);
 private:
 	Person* m_familyMember;
 };

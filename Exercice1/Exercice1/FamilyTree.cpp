@@ -5,7 +5,7 @@
 FamilyTree::FamilyTree()
 {}
 
-FamilyTree::FamilyTree(Person *familyMember):m_familyMember(familyMember)
+FamilyTree::FamilyTree(Person *familyMember) :m_familyMember(familyMember)
 {}
 
 FamilyTree::~FamilyTree()
@@ -52,24 +52,10 @@ int FamilyTree::size()
 	}
 }
 
-vector<Person*> FamilyTree::descendantsInOrder(Person * p)
+vector<Person*> FamilyTree::whoHasEyesThatColor(Person * p, Color c, Order order)
 {
-	return vector<Person*>();
-}
-
-vector<Person*> FamilyTree::descendantsPreOrder(Person * p)
-{
-	return vector<Person*>();
-}
-
-vector<Person*> FamilyTree::descendantsPostOrder(Person * p)
-{
-	return vector<Person*>();
-}
-
-vector<Person*> FamilyTree::whoHasEyesThatColor(Color c)
-{
-	vector<Person*> allFamily = this->getFamilyMember()->peopleInFamily();
+	//get people from family and check for color
+	vector<Person*> allFamily = p->peopleInFamily(order);
 	vector<Person*> goodColor;
 	for (vector<Person*>::iterator it = allFamily.begin(); it != allFamily.end(); ++it) {
 		if ((*it)->getEyesColor() == c)
@@ -78,27 +64,53 @@ vector<Person*> FamilyTree::whoHasEyesThatColor(Color c)
 	return goodColor;
 }
 
-vector<Person*> FamilyTree::ancestorsWhoHasEyesThatColor(Person * p, Color c)
+vector<Person*> FamilyTree::ancestorsWhoHasEyesThatColor(Person * p, Color c, Order order)
 {
-	return vector<Person*>();
+	//get people from ancestors and check for color
+	vector<Person*> allFamilyUpper = p->Ancestors(p, order);
+	vector<Person*> goodColor;
+	for (vector<Person*>::iterator it = allFamilyUpper.begin(); it != allFamilyUpper.end(); ++it) {
+		if ((*it)->getEyesColor() == c)
+			goodColor.push_back(*it);
+	}
+	return goodColor;
 }
 
 
-float FamilyTree::averageAge()
+float FamilyTree::averageAge(Order order)
 {
-	vector<Person*> allFamily = this->getFamilyMember()->peopleInFamily();
+	//get people from family and sum age
+	vector<Person*> allFamily = this->getFamilyMember()->peopleInFamily(order);
 	float sum = 0;
 	for (vector<Person*>::iterator it = allFamily.begin(); it != allFamily.end(); ++it) {
-		if ((*it)->getDeathYear() != numeric_limits<int>::max())
-			sum+= 2017 - (*it)->getBirthYear();
+		if ((*it)->getDeathYear() == numeric_limits<int>::max())
+			sum += 2017 - (*it)->getBirthYear();
 		else
 			sum += (*it)->getDeathYear() - (*it)->getBirthYear();
-
 	}
 
-	return sum/allFamily.size();
+	return sum / allFamily.size();
 }
 
+int FamilyTree::numberOfPersonsInFamily(Person * p)
+{
+	return p->numberOfPersonsInFamily();
+}
+
+vector<Person*> FamilyTree::peopleInFamily(Person * p, Order order)
+{
+	return p->peopleInFamily(order);
+}
+
+vector<Person*> FamilyTree::ancestors(Person * p, Order order)
+{
+	return p->Ancestors(p, order);
+}
+
+vector<Person*> FamilyTree::descendants(Person * p, Order order)
+{
+	return p->peopleInFamilyLower(order);
+}
 
 
 

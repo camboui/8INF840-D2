@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "Color.h"
+#include "Order.h"
 
 using namespace std;
 
@@ -16,9 +17,7 @@ public:
 	~Person();
 
 
-	
-
-	//getter
+	//getters
 	string getFirstName()	    { return m_firstName;	};
 	string getLastName()	    { return m_lastName;	};
 	int			getBirthYear()	{ return m_birthYear;	};
@@ -26,12 +25,13 @@ public:
 	Color		getEyesColor()	{ return m_eyesColor;	};
 	Person*		getFather()		{ return m_father;		};	
 	Person*		getMother()	    { return m_mother;		};
+	//brother is infinite an list, looping on itself
 	Person*		getBrother()    { return m_brother;     };
 	Person*		getChild()      { return m_child; };
 
 	
 
-	//setter
+	//setters
 	void setFirstName(string firstName)	        { m_firstName = firstName;	};
 	void setLastName(string lastName)		    { m_lastName = lastName;	};
 	void setBirthYear(int birthYear)			{ m_birthYear = birthYear;	};
@@ -46,10 +46,18 @@ public:
 	void printInfo();
 	vector<Person*> getChildren();
 	vector<Person*> getBrothers();
-	int sizeUpper();
-	int sizeLower();
 	int numberOfPersonsInFamily();
-	vector<Person*> peopleInFamily();
+	vector<Person*> peopleInFamily(Order order);
+	vector<Person*> Ancestors(Person * initialNode, Order order);
+	//give the list of all Person in the family of "this" higher than "this"
+	vector<Person*> peopleInFamilyUpper(Order order);
+	//give the list of all Person in the family of "this" lower than "this"
+	vector<Person*> peopleInFamilyLower(Order order);
+
+	//look for the higher size from point to top
+	int sizeUpper();
+	//look for the higher size from point to bottom
+	int sizeLower();
 
 private:
 	string	        m_firstName;
@@ -59,14 +67,18 @@ private:
 	Color		    m_eyesColor; 
 	Person*		    m_father;
 	Person*		    m_mother;
+	//brother is infinite an list, looping on itself
 	Person*	        m_brother;
 	Person*	        m_child;
 
 	int numberOfPersonsInFamilyUpper();
 	int numberOfPersonsInFamilyLower();
-
-	vector<Person*> peopleInFamilyUpper();
-	vector<Person*> peopleInFamilyLower();
+	//See if "this" can be a child according to his father
+	bool isAgeCorrectForFather();
+	//See if "this" can be a child according to his mother
+	bool isAgeCorrectForMother();
 };
 
 #endif
+
+
