@@ -18,13 +18,22 @@ private:
 	RedBlackNode<T>*	recFindKey(T key, RedBlackNode<T>* node);
 	void				recAddKey(T key, RedBlackNode<T>* node);
 	void				recDeleteKey(T key);
-	void				fixTree(RedBlackNode<T>* node);
 };
 
 template <typename T>
 void leftRotate(RedBlackNode<T>* node);
 template <typename T>
 void rightRotate(RedBlackNode<T>* node);
+template <typename T>
+void insertCase1(RedBlackNode<T>* node);
+template <typename T>
+void insertCase2(RedBlackNode<T>* node);
+template <typename T>
+void insertCase3(RedBlackNode<T>* node);
+template <typename T>
+void insertCase4(RedBlackNode<T>* node);
+template <typename T>
+void insertCase5(RedBlackNode<T>* node);
 
 template <typename T>
 RedBlackTree<T>::RedBlackTree()
@@ -91,7 +100,7 @@ void RedBlackTree<T>::recAddKey(T key, RedBlackNode<T>* node)
 					RedBlackNode<T>* newNode = new RedBlackNode<T>(RED, key);
 					newNode->setParentNode(node);
 					node->setRightNode(newNode);
-					fixTree(newNode);
+					insertCase1(newNode);
 				}
 			}
 			else {
@@ -102,7 +111,7 @@ void RedBlackTree<T>::recAddKey(T key, RedBlackNode<T>* node)
 					RedBlackNode<T>* newNode = new RedBlackNode<T>(RED, key);
 					newNode->setParentNode(node);
 					node->setLeftNode(newNode);
-					fixTree(newNode);
+					insertCase1(newNode);
 				}
 			}
 		}
@@ -120,7 +129,7 @@ void RedBlackTree<T>::recAddKey(T key, RedBlackNode<T>* node)
 		else {
 			node->setLeftNode(newNode);
 		}
-		fixTree(newNode);
+		insertCase1(newNode);
 	}
 }
 
@@ -135,6 +144,69 @@ void RedBlackTree<T>::recDeleteKey(T key)
 {
 }
 
+template<typename T>
+void insertCase1(RedBlackNode<T>* node)
+{
+	if (node->getParentNode() == nullptr) {
+		//node is the head of the tree
+		node->setColor(BLACK);
+	}
+	else {
+		insertCase2(node);
+	}
+}
+
+template<typename T>
+void insertCase2(RedBlackNode<T>* node)
+{
+	if (node->getParentNode()->getColor() == BLACK) {
+		return; /* Tree is still valid */
+	}
+	else {
+		insertCase3(node);
+	}
+}
+
+template<typename T>
+void insertCase3(RedBlackNode<T>* node)
+{
+	if ((node->getUncleNode() != nullptr) && (node->getUncleNode()->getColor() == RED)) {
+		node->getParentNode()->setColor(BLACK);
+		node->getUncleNode()->setColor(BLACK);
+		node->getGrandParentNode()->setColor(RED);
+		insertCase1(node->getGrandParentNode());
+	}
+	else {
+		insertCase4(node);
+	}
+}
+
+template<typename T>
+void insertCase4(RedBlackNode<T>* node)
+{
+	if ((node == node->getParentNode()->getRightNode()) && (node->getParentNode() == node->getGrandParentNode()->getLeftNode())) {
+		leftRotate(node);
+		node = node->getLeftNode();
+	}
+	else if ((node == node->getParentNode()->getLeftNode()) && (node->getParentNode() == node->getGrandParentNode()->getRightNode())) {		
+		rightRotate(node);
+		node = node->getRightNode(); 
+	}
+	insertCase5(node);
+}
+
+template<typename T>
+void insertCase5(RedBlackNode<T>* node)
+{
+	node->getParentNode()->setColor(BLACK);
+	node->getGrandParentNode()->setColor(RED);
+	if (node == node->getParentNode()->getLeftNode())
+		rightRotate(node->getParentNode());
+	else
+		leftRotate(node->getParentNode());
+}
+
+/*
 template<typename T>
 void RedBlackTree<T>::fixTree(RedBlackNode<T>* node)
 {
@@ -173,6 +245,7 @@ void RedBlackTree<T>::fixTree(RedBlackNode<T>* node)
 		}
 	}
 }
+*/
 
 template<typename T>
 void leftRotate(RedBlackNode<T>* node)
@@ -198,20 +271,19 @@ template<typename T>
 void rightRotate(RedBlackNode<T>* node)
 {
 	RedBlackNode<T>* temp;
-	temp = node->getLeftNode();
-	node->setLeftNode(temp->getRightNode());
-	if (temp->getRightNode() != nullptr) {
-		temp->getRightNode()->setParentNode(node);
+	temp = node->getParentNode();
+	temp->setLeftNode(node->getRightNode());
+	if (temp->getLeftNode() != nullptr) {
+		temp->getLeftNode()->setParentNode(temp);
 	}
-	temp->setParentNode(node->getParentNode());
-	if (node == node->getParentNode()->getLeftNode()) {
-		node->getParentNode()->setLeftNode(temp);
+	node->setParentNode(temp->getParentNode());
+	if (temp == temp->getParentNode()->getLeftNode()) {
+		temp->getParentNode()->setLeftNode(node);
 	}
 	else {
-		node->getParentNode()->setRightNode(temp);
+		temp->getParentNode()->setRightNode(node);
 	}
-	temp->setRightNode(node);
-	node->setParentNode(temp);
+	node->setRightNode(temp);
 }
 
 
