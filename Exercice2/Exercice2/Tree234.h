@@ -1,7 +1,7 @@
 #ifndef TREE234_H
 #define TREE234_H
 
-#include "Node.h"
+#include "Node234.h"
 #include <algorithm>
 
 template <typename T>
@@ -12,32 +12,32 @@ public:
 	Tree234(vector<T> keys);
 
 	bool isEmpty();
-	Node<T>*findNode(const T & key);
+	Node234<T>* findNode(const T & key);
 	void addKey(const T & key);
 	void deleteKey(const T & key);
 private:
-	Node<T>*m_head;
-	vector<T> findNext(Node<T>* node, T key);
-	void recAddKey(T key, Node<T>*first, Node<T>*upperNode);
-	void recDeleteKey(const T& delKey, Node<T>*first, Node<T>*delNode);
-	Node<T>*recFindNode(const T & key, Node<T>*first);
+	Node234<T>* m_head;
+	vector<T> findNext(Node234<T>* node, T key);
+	void recAddKey(T key, Node234<T>* first, Node234<T>* upperNode);
+	void recDeleteKey(const T& delKey, Node234<T>* first, Node234<T>* delNode);
+	Node234<T>* recFindNode(const T & key, Node234<T>* first);
 };
 
 template<typename T>
 Tree234<T>::Tree234()
 {
-	m_head = new Node<T>();
+	m_head = new Node234<T>();
 }
 
 template<typename T>
 Tree234<T>::Tree234(vector<T> keys)
 {
 	try {
-		m_head = new Node<T>(keys);
+		m_head = new Node234<T>(keys);
 	}
 	catch (logic_error error) {
 		cout << error.what();
-		m_head = new Node<T>();
+		m_head = new Node234<T>();
 		for (int i; i < keys.size(); i++)
 			addKey(keys[i]);
 	}
@@ -51,13 +51,13 @@ bool Tree234<T>::isEmpty()
 }
 
 template<typename T>
-Node<T>*Tree234<T>::findNode(const T & key)
+Node234<T>* Tree234<T>::findNode(const T & key)
 {
 	return recFindNode(key, m_head);
 }
 
 template<typename T>
-Node<T>*Tree234<T>::recFindNode(const T & key, Node<T>*first)
+Node234<T>* Tree234<T>::recFindNode(const T & key, Node234<T>* first)
 {
 	vector<T> keys = first->getKeys();
 	if (std::find(keys.begin(), keys.end(), key) != keys.end())
@@ -83,13 +83,13 @@ void Tree234<T>::deleteKey(const T & delKey)
 }
 
 template<typename T>
-void Tree234<T>::recDeleteKey(const T & delKey, Node<T>*first, Node<T>*delNode)
+void Tree234<T>::recDeleteKey(const T & delKey, Node234<T>* first, Node234<T>* delNode)
 {
 	int nextLeafIndex;
-	Node<T>*nodeL = nullptr;
-	Node<T>*nodeR = nullptr;
-	Node<T>*newNode = nullptr;
-	Node<T>*nextNode = nullptr;
+	Node234<T>* nodeL = nullptr;
+	Node234<T>* nodeR = nullptr;
+	Node234<T>* newNode = nullptr;
+	Node234<T>* nextNode = nullptr;
 	vector<T> temp;
 
 	int keyIndex = std::find(first->getKeys().begin(), first->getKeys().end(), delKey) - first->getKeys().begin();
@@ -184,7 +184,7 @@ void Tree234<T>::recDeleteKey(const T & delKey, Node<T>*first, Node<T>*delNode)
 			newNode->deleteKey(0);
 		}
 		else {
-			newNode = new Node<T>();
+			newNode = new Node234<T>();
 
 			if (nodeL != nullptr) {
 				if (!nextNode->isLeaf()) {
@@ -240,7 +240,7 @@ void Tree234<T>::recDeleteKey(const T & delKey, Node<T>*first, Node<T>*delNode)
 }
 
 template<typename T>
-vector<T> Tree234<T>::findNext(Node<T>* node, T key)
+vector<T> Tree234<T>::findNext(Node234<T>* node, T key)
 {
 	vector<T> temp;
 	temp.push_back(key);
@@ -251,13 +251,13 @@ vector<T> Tree234<T>::findNext(Node<T>* node, T key)
 }
 
 template<typename T>
-void Tree234<T>::recAddKey(T key, Node<T>*first, Node<T>*upperNode)
+void Tree234<T>::recAddKey(T key, Node234<T>* first, Node234<T>* upperNode)
 {
 	if (first->getNumberOfKeys() >= 3)
 	{
 		unsigned int medianIndex = first->getMedianIndex();
-		Node<T>*leftNewNode(new Node<T>());
-		Node<T>*rightNewNode(new Node<T>());
+		Node234<T>* leftNewNode(new Node234<T>());
+		Node234<T>* rightNewNode(new Node234<T>());
 
 		for (unsigned int i = 0; i < medianIndex; i++) {
 			try {
@@ -287,7 +287,7 @@ void Tree234<T>::recAddKey(T key, Node<T>*first, Node<T>*upperNode)
 			}
 		}
 		if (first == m_head) {
-			upperNode = new Node<T>;
+			upperNode = new Node234;
 			m_head = upperNode;
 		}
 		else {

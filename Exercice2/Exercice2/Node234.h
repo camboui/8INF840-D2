@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef NODE234_H
+#define NODE234_H
 
 #include <vector>
 
@@ -8,11 +8,11 @@
 
 using namespace std;
 template<typename T>
-class Node
+class Node234
 {
 public:
-	Node();
-	Node(vector<T> keys, vector<Node<T>*> leaves);
+	Node234();
+	Node234(vector<T> keys, vector<Node234<T>*> leaves);
 
 	vector<T> & getKeys()				{ return m_keys; };
 	T getKey(int i)						{ return m_keys[i]; };
@@ -21,12 +21,12 @@ public:
 	void addKey(T key);
 	void deleteKey(int i);
 
-	vector<Node<T>*> & getLeaves()			{ return m_leaves; };
-	Node<T>*getLeaf(int i)					{ return m_leaves[i]; };
+	vector<Node234<T>*> & getLeaves()			{ return m_leaves; };
+	Node234<T>*getLeaf(int i)					{ return m_leaves[i]; };
 	int getNumberOfLeaves()					{ return m_leaves.size(); };
-	void setLeaves(vector<Node<T>>leaves)	{ m_leaves = leaves; };
-	void addLeaf(Node<T>*leaf);
-	void addLeaf(Node<T>*leaf, int index);
+	void setLeaves(vector<Node234<T>>leaves)	{ m_leaves = leaves; };
+	void addLeaf(Node234<T>*leaf);
+	void addLeaf(Node234<T>*leaf, int index);
 	void deleteLeaf(int i);
 
 	bool isLeaf() { return m_leaves.size() == 0; };
@@ -35,22 +35,22 @@ public:
 
 private:
 	vector<T> m_keys;
-	vector<Node<T>*> m_leaves;
+	vector<Node234<T>*> m_leaves;
 };
 
 template<typename T>
-bool operator==(Node<T> n1, Node<T> n2);
+bool operator==(Node234<T> n1, Node234<T> n2);
 
 template<typename T>
-Node<T>::Node()
+Node234<T>::Node234()
 {
 	m_keys = vector<T>();
-	m_leaves = vector<Node<T>*>();
+	m_leaves = vector<Node234<T>*>();
 }
 
 
 template<typename T>
-Node<T>::Node(vector<T> keys, vector<Node<T>*> leaves)
+Node234<T>::Node234(vector<T> keys, vector<Node234<T>*> leaves)
 {
 	if (m_keys.size() >= KEYS_MAX)
 		throw logic_error("number of keys is greater than KEYS_MAX");
@@ -61,7 +61,7 @@ Node<T>::Node(vector<T> keys, vector<Node<T>*> leaves)
 }
 
 template<typename T>
-void Node<T>::addKey(T key)
+void Node234<T>::addKey(T key)
 {
 	if (m_keys.size() >= KEYS_MAX) {
 		throw logic_error("KEYS_MAX already reached");
@@ -71,13 +71,13 @@ void Node<T>::addKey(T key)
 }
 
 template<typename T>
-void Node<T>::deleteKey(int i)
+void Node234<T>::deleteKey(int i)
 {
 	m_keys.erase(m_keys.begin() + i);
 }
 
 template<typename T>
-void Node<T>::addLeaf(Node<T>*leaf)
+void Node234<T>::addLeaf(Node234<T>*leaf)
 {
 	if (m_leaves.size() >= LEAVES_MAX) {
 		throw logic_error("KEYS_MAX already reached");
@@ -87,7 +87,7 @@ void Node<T>::addLeaf(Node<T>*leaf)
 }
 
 template<typename T>
-void Node<T>::addLeaf(Node<T>*leaf, int index)
+void Node234<T>::addLeaf(Node234<T>*leaf, int index)
 {
 	if (m_leaves.size() >= LEAVES_MAX) {
 		throw logic_error("KEYS_MAX already reached");
@@ -96,14 +96,14 @@ void Node<T>::addLeaf(Node<T>*leaf, int index)
 }
 
 template<typename T>
-void Node<T>::deleteLeaf(int i)
+void Node234<T>::deleteLeaf(int i)
 {
 	m_leaves.erase(m_leaves.begin() + i);
 }
 
 
 template<typename T>
-int Node<T>::getMedianIndex()
+int Node234<T>::getMedianIndex()
 {
 	if (m_keys.size() % 2 == 0)
 		throw logic_error("no median available");

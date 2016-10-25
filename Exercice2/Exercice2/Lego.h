@@ -6,6 +6,7 @@
 class Lego
 {
 public:
+	Lego();
 	Lego(std::string id, std::string description, std::string category);
 	Lego(const Lego &legoToCopy);
 
