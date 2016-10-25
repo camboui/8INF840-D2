@@ -18,7 +18,13 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Arbre2_3_4.cpp">
+    <ClCompile Include="Lego.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LegoParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -26,9 +32,21 @@
     <Text Include="pieces.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="50_pieces.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Arbre2_3_4.h">
+    <ClInclude Include="Lego.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree234.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LegoParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

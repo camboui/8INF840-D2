@@ -2,12 +2,6 @@
 
 
 
-Lego::Lego():
-	m_id(""),
-	m_description(""),
-	m_category("")
-{
-}
 
 Lego::Lego(std::string id, std::string description, std::string category):
 	m_id(id), 
@@ -23,22 +17,17 @@ Lego::Lego(const Lego & legoToCopy):
 {
 }
 
-
-Lego::~Lego()
+bool operator>(Lego const& l1, Lego const& l2)
 {
+	return l1.getId() > l2.getId();
 }
 
-bool Lego::operator>(const Lego lego) const
+bool operator<(Lego const& l1, Lego const& l2)
 {
-	return false;
+	return l1.getId() < l2.getId();
 }
 
-bool Lego::operator<(const Lego lego) const
+bool operator==(Lego const& l1, Lego const& l2)
 {
-	return false;
-}
-
-bool Lego::operator==(const Lego lego) const
-{
-	return false;
+	return l1.getId() == l2.getId();
 }

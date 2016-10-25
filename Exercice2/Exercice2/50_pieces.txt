@@ -1,0 +1,53 @@
+piece_id,descr,category
+
+0687b1,Set 0687 Activity Booklet 1,Non-LEGO
+0901,Baseplate 16 x 30 with Set 080 Yellow House Print,Baseplates
+0902,Baseplate 16 x 24 with Set 080 Small White House Print,Baseplates
+0903,Baseplate 16 x 24 with Set 080 Red House Print,Baseplates
+0904,Baseplate 16 x 24 with Set 080 Large White House Print,Baseplates
+1,Homemaker Bookcase 2 x 4 x 4,Containers
+10,Baseplate 24 x 32,Baseplates
+10013-1,10013 Open Freight Wagon,Other
+10016414,Sticker Sheet #1 for 41055-1,Non-LEGO
+10017-1,10017 Hopper Wagon,Other
+10019stk01,Sticker for Set 10019 - (43274/4170393),Non-LEGO
+10026stk01,Sticker for Set 10026 - (44942/4184185),Non-LEGO
+10029stk01,Sticker for Set 10029 - (4216816),Non-LEGO
+10036stk01,Sticker for Set 10036 - (821407),Non-LEGO
+10039,Pullback Motor 8 x 4 x 2/3,Mechanical
+10048,Minifig Hair Tousled,Minifigs
+10049,Minifig Shield Broad with Spiked Bottom and Cutout Corner,Minifig Accessories
+10049pr0001,Minifig Shield Broad with Spiked Bottom and Cutout Corner with Handprint Print,Minifig Accessories
+10050,Minifig Sword [Uruk-hai],Minifig Accessories
+10051,Minifig Helmet Castle with Lateral Comb [Uruk-hai],Minifig Accessories
+10051pr0001,Minifig Helmet Castle with Lateral Comb and Handprint Print,Minifig Accessories
+10052,"Minifig Beard, Rounded End [Gandalf]",Minifig Accessories
+10053,Minifig Sword Small,Minifig Accessories
+10054,Minifig Helmet - Rohan Style Castle with Cheek Protection and Horsehead Comb,Minifig Accessories
+10054pr0001,"Minifig Helmet - Rohan Style with Cheek Protection, Horsehead Comb and Eomer Print",Minifig Accessories
+10054pr0002,Minifig Helmet - Rohan Cheek Protection and Theoden Print,Minifig Accessories
+10055,Minifig Hair Long Straight with Elf Ears [Plain],Minifig Accessories
+10055pr0001,Minifig Hair Long Straight with Light Flesh Elf Ears Print,Minifig Accessories
+10057,Body / Head Gollum,Minifigs
+10057pr0001,Body / Head Gollum - Wide Eyes,Minifigs
+10057pr0002,Body / Head Gollum - Narrow Eyes,Minifigs
+10058,"Arm, Bent [Gollum]",Minifigs
+10061,"Arm Goblin King, Left",Minifigs
+10062,"Hand Cave Troll, Left",Minifigs
+10063,"Arm Goblin King, Right",Minifigs
+10064,"Hand Cave Troll, Right",Minifigs
+10065,Minifig Beard - Full with Braided Moustache Ends,Minifigs
+10075cdb01,"Paper, Cardboard Backdrop for Set 10075 Spider-Man Action Pack",Non-LEGO
+10099,Minifig Gold Medal with Red Ribbon,Minifig Accessories
+10111,ADULT FIGURE W/HEADSET,"Duplo, Quatro and Primo"
+10113,Minifig Batman Mask with Angular Ears and Pronounced Brow,Minifigs
+10124,Arm Hulk - Right,Minifigs
+10124pr0001,"Arm Giant, Right with Blue Darkseid Print",Minifigs
+10126,Hand Hulk - Right,Minifigs
+10127,Hand Hulk - Left,Minifigs
+10127stk01,"Sticker for Set 10127 - Sheet 1, Primarily Eastern Teams (47852/4210596)",Non-LEGO
+10127stk02,"Sticker for Set 10127 - Sheet 2, Primarily Western Teams (47851/4210595)",Non-LEGO
+10127stk03,"Sticker for Set 10127 - Sheet 3, All 30 Teams and Numbers 1-9 (47853/4210598)",Non-LEGO
+10129stk01,Sticker for Set 10129 - (48074/4214068),Non-LEGO
+10134stk01,Sticker for Set 10134 - (48981/4221407),Non-LEGO
+10144stk01,Sticker for Set 10144 - (53390/4269558),Non-LEGO

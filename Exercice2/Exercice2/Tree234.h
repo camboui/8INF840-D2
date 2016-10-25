@@ -2,6 +2,7 @@
 #define TREE234_H
 
 #include "Node.h"
+#include <algorithm>
 
 template <typename T>
 class Tree234
@@ -9,302 +10,315 @@ class Tree234
 public:
 	Tree234();
 	Tree234(vector<T> keys);
-	virtual ~Tree234();
 
 	bool isEmpty();
-	shared_ptr<Node<T>> search(const T & key);
+	Node<T>*findNode(const T & key);
 	void addKey(const T & key);
-
-	void deleteKey(const T & keyToDelete);
+	void deleteKey(const T & key);
 private:
-	shared_ptr<Node<T>> m_root;
-	void _addKey(T key, shared_ptr<Node<T>> startNode, shared_ptr<Node<T>> parentNode);
-	void _deleteKey(const T& keyToDelete, shared_ptr<Node<T>> startNode, shared_ptr<Node<T>> nodeToDelete);
-	shared_ptr<Node<T>> _search(const T & key, shared_ptr<Node<T>> startNode);
+	Node<T>*m_head;
+	vector<T> findNext(Node<T>* node, T key);
+	void recAddKey(T key, Node<T>*first, Node<T>*upperNode);
+	void recDeleteKey(const T& delKey, Node<T>*first, Node<T>*delNode);
+	Node<T>*recFindNode(const T & key, Node<T>*first);
 };
 
 template<typename T>
 Tree234<T>::Tree234()
 {
-	m_root = make_shared<Node<T>>();
+	m_head = new Node<T>();
 }
 
 template<typename T>
 Tree234<T>::Tree234(vector<T> keys)
 {
-	try
-	{
-		m_root = make_shared<Node<T>>(keys);
+	try {
+		m_head = new Node<T>(keys);
 	}
-	catch (logic_error error)
-	{
+	catch (logic_error error) {
 		cout << error.what();
-		m_root = make_shared<Node<T>>();
+		m_head = new Node<T>();
 		for (int i; i < keys.size(); i++)
 			addKey(keys[i]);
 	}
 }
 
-template<typename T>
-Tree234<T>::~Tree234()
-{
-}
 
 template<typename T>
 bool Tree234<T>::isEmpty()
 {
-	return (m_root->getNumberOfKeys() == 0);
+	return (m_head->getNumberOfKeys() == 0);
 }
 
 template<typename T>
-shared_ptr<Node<T>> Tree234<T>::search(const T & key)
+Node<T>*Tree234<T>::findNode(const T & key)
 {
-	return _search(key, m_root);
+	return recFindNode(key, m_head);
 }
 
 template<typename T>
-shared_ptr<Node<T>> Tree234<T>::_search(const T & key, shared_ptr<Node<T>> startNode)
+Node<T>*Tree234<T>::recFindNode(const T & key, Node<T>*first)
 {
-	vector<T> keys = startNode->getKeys();
-	if (find(keys.begin(), keys.end(), key) != keys.end())
-		return startNode;
-	if (startNode->isLeaf())
+	vector<T> keys = first->getKeys();
+	if (std::find(keys.begin(), keys.end(), key) != keys.end())
+		return first;
+	if (first->isLeaf())
 		return nullptr;
 
-	vector<T> compareKeys;
-	compareKeys.push_back(key);
-	compareKeys.reserve(compareKeys.size() + startNode->getKeys().size());
-	compareKeys.insert(compareKeys.end(), startNode->getKeys().begin(), startNode->getKeys().end());
-	sort(compareKeys.begin(), compareKeys.end());
-	int leafPos = find(compareKeys.begin(), compareKeys.end(), key) - compareKeys.begin();
-	return _search(key, startNode->getLeaf(leafPos));
+	vector<T> temp = findNext(first, key);
+	int leafIndex = std::find(compareKeys.begin(), compareKeys.end(), key) - compareKeys.begin();
+	return recFindNode(key, first->getLeaf(leafIndex));
 }
 
 template <typename T>
 void Tree234<T>::addKey(const T & key)
 {
-	_addKey(key, m_root, nullptr);
+	recAddKey(key, m_head, nullptr);
 }
 
 template<typename T>
-void Tree234<T>::deleteKey(const T & keyToDelete)
+void Tree234<T>::deleteKey(const T & delKey)
 {
-	_deleteKey(keyToDelete, m_root, nullptr);
+	recDeleteKey(delKey, m_head, nullptr);
 }
 
 template<typename T>
-void Tree234<T>::_deleteKey(const T & keyToDelete, shared_ptr<Node<T>> startNode, shared_ptr<Node<T>> nodeToDelete)
+void Tree234<T>::recDeleteKey(const T & delKey, Node<T>*first, Node<T>*delNode)
 {
-	int keyPosition = find(startNode->getKeys().begin(), startNode->getKeys().end(), keyToDelete) - startNode->getKeys().begin();
+	int nextLeafIndex;
+	Node<T>*nodeL = nullptr;
+	Node<T>*nodeR = nullptr;
+	Node<T>*newNode = nullptr;
+	Node<T>*nextNode = nullptr;
+	vector<T> temp;
 
-	if (keyPosition != startNode->getNumberOfKeys())
-		nodeToDelete = startNode;
+	int keyIndex = std::find(first->getKeys().begin(), first->getKeys().end(), delKey) - first->getKeys().begin();
 
-	if (startNode->isLeaf())
-	{
-		if (startNode == nodeToDelete)
-		{
-			if (keyPosition != startNode->getNumberOfKeys())
-			{
-				startNode->removeKey(keyPosition);
+	if (keyIndex != first->getNumberOfKeys())
+		delNode = first;
+
+	if (first->isLeaf()) {
+		if (first == delNode) {
+			if (keyIndex != first->getNumberOfKeys()) {
+				first->deleteKey(keyIndex);
 				return;
 			}
 		}
-		if (nodeToDelete != nullptr)
-		{
-			keyPosition = find(nodeToDelete->getKeys().begin(), nodeToDelete->getKeys().end(), keyToDelete) - nodeToDelete->getKeys().begin();
-			if (keyPosition != nodeToDelete->getNumberOfKeys())
-				nodeToDelete->removeKey(keyPosition);
-			nodeToDelete->addKey(startNode->getKey(0));
-			startNode->removeKey(0);
+		if (delNode != nullptr) {
+			keyIndex = std::find(delNode->getKeys().begin(), delNode->getKeys().end(), delKey) - delNode->getKeys().begin();
+			if (keyIndex != delNode->getNumberOfKeys()) {
+				delNode->deleteKey(keyIndex);
+			}
+			try {
+				delNode->addKey(first->getKey(0));
+			}
+			catch (logic_error error) {
+				cout << error.what();
+			}
+			first->deleteKey(0);
 			return;
-
 		}
 		throw logic_error("Key not found in the tree");
-
-	}
-	shared_ptr<Node<T>> leftNeighbourNode;
-	shared_ptr<Node<T>> rightNeighbourNode;
-	shared_ptr<Node<T>> mergedNode;
-	shared_ptr<Node<T>> nextNode;
-
-	int nextLeafPos;
-	if (nodeToDelete == nullptr)
-	{
-		vector<T> sumKeys;
-		sumKeys.push_back(keyToDelete);
-		sumKeys.reserve(sumKeys.size() + startNode->getKeys().size());
-		sumKeys.insert(sumKeys.end(), startNode->getKeys().begin(), startNode->getKeys().end());
-		sort(sumKeys.begin(), sumKeys.end());
-		nextLeafPos = find(sumKeys.begin(), sumKeys.end(), keyToDelete) - sumKeys.begin();
-		nextNode = startNode->getLeaf(nextLeafPos);
-	}
-	else
-	{
-		vector<T> sumKeys;
-		sumKeys.push_back(keyToDelete);
-		sumKeys.reserve(sumKeys.size() + startNode->getKeys().size());
-		sumKeys.insert(sumKeys.end(), startNode->getKeys().begin(), startNode->getKeys().end());
-		sort(sumKeys.begin(), sumKeys.end());
-		nextLeafPos = find(sumKeys.begin(), sumKeys.end(), keyToDelete) - sumKeys.begin() + 1;
-		nextNode = startNode->getLeaf(nextLeafPos);
 	}
 
+	temp = findNext(delNode, delKey);
+	if (delNode == nullptr) {
+		nextLeafIndex = std::find(temp.begin(), temp.end(), delKey) - temp.begin();
+	}
+	else {
+		nextLeafIndex = std::find(temp.begin(), temp.end(), delKey) - temp.begin() + 1;
+	}
+	nextNode = first->getLeaf(nextLeafIndex);
 
-	if (nextNode->getNumberOfKeys() == 1)
-	{
-		if (nextLeafPos > 0)
-			leftNeighbourNode = startNode->getLeaf(nextLeafPos - 1);
-		if (nextLeafPos < startNode->getNumberOfLeaves() - 1)
-			rightNeighbourNode = startNode->getLeaf(nextLeafPos + 1);
+	if (nextNode->getNumberOfKeys() == 1) {
+		if (nextLeafIndex > 0) {
+			nodeL = first->getLeaf(nextLeafIndex - 1);
+		}
+		if (nextLeafIndex < first->getNumberOfLeaves() - 1) {
+			nodeR = first->getLeaf(nextLeafIndex + 1);
+		}
 
-		if (leftNeighbourNode != nullptr && leftNeighbourNode->getNumberOfKeys() != 1)
-		{
-			mergedNode = leftNeighbourNode;
-			nextNode->addKey(startNode->getKey(nextLeafPos - 1));
-			if (!mergedNode->isLeaf())
-			{
-				nextNode->pushLeaf(mergedNode->getLeaf(mergedNode->getNumberOfLeaves() - 1));
-				mergedNode->removeLeaf(mergedNode->getNumberOfLeaves() - 1);
+		if (nodeL != nullptr && nodeL->getNumberOfKeys() != 1) {
+			newNode = nodeL;
+			try {
+				nextNode->addKey(first->getKey(nextLeafIndex - 1));
+			}
+			catch (logic_error error) {
+				cout << error.what();
+			}
+			if (!newNode->isLeaf()) {
+				nextNode->addLeaf(newNode->getLeaf(newNode->getNumberOfLeaves() - 1));
+				newNode->deleteLeaf(newNode->getNumberOfLeaves() - 1);
 			}
 
-			startNode->removeKey(nextLeafPos - 1);
-			startNode->addKey(mergedNode->getKey(mergedNode->getNumberOfLeaves() - 1));
-			mergedNode->removeKey(mergedNode->getNumberOfLeaves() - 1);
+			first->deleteKey(nextLeafIndex - 1);
+			try {
+				first->addKey(newNode->getKey(newNode->getNumberOfLeaves() - 1));
+			}
+			catch (logic_error error) {
+				cout << error.what();
+			}
+			newNode->deleteKey(newNode->getNumberOfLeaves() - 1);
 		}
-		else if (rightNeighbourNode != nullptr && rightNeighbourNode->getNumberOfLeaves() != 1)
+		else if (nodeR != nullptr && nodeR->getNumberOfLeaves() != 1)
 		{
-			mergedNode = rightNeighbourNode;
-			nextNode->addKey(startNode->getKey(nextLeafPos));
-			if (!mergedNode->isLeaf())
-			{
-				nextNode->pushLeaf(mergedNode->getLeaf(0));
-				mergedNode->removeLeaf(0);
+			newNode = nodeR;
+			try {
+				nextNode->addKey(first->getKey(nextLeafIndex));
+			}
+			catch (logic_error error) {
+				cout << error.what();
+			}
+			if (!newNode->isLeaf()) {
+				nextNode->addLeaf(newNode->getLeaf(0));
+				newNode->deleteLeaf(0);
 			}
 
-			startNode->removeKey(nextLeafPos);
-			startNode->addKey(mergedNode->getKey(0));
-			mergedNode->removeKey(0);
+			first->deleteKey(nextLeafIndex);
+			try {
+				first->addKey(newNode->getKey(0));
+			}
+			catch (logic_error error) {
+				cout << error.what();
+			}
+			newNode->deleteKey(0);
 		}
-		else
-		{
-			mergedNode = make_shared<Node<T>>();
+		else {
+			newNode = new Node<T>();
 
-			if (leftNeighbourNode != nullptr)
-			{
-				if (!nextNode->isLeaf())
-				{
-					for (size_t i = 0; i < leftNeighbourNode->getNumberOfLeaves(); i++)
-						mergedNode->pushLeaf(leftNeighbourNode->getLeaf(i));
-					for (size_t i = 0; i < nextNode->getNumberOfLeaves(); i++)
-						mergedNode->pushLeaf(nextNode->getLeaf(i));
+			if (nodeL != nullptr) {
+				if (!nextNode->isLeaf()) {
+					for (int i = 0; i < nodeL->getNumberOfLeaves(); i++) {
+						newNode->addLeaf(nodeL->getLeaf(i));
+					}
+					for (int i = 0; i < nextNode->getNumberOfLeaves(); i++) {
+						newNode->addLeaf(nextNode->getLeaf(i));
+					}
 				}
-
-				mergedNode->addKey(leftNeighbourNode->getKey(0));
-				mergedNode->addKey(startNode->getKey(nextLeafPos - 1));
-				mergedNode->addKey(nextNode->getKey(0));
-
-				startNode->removeLeaf(nextLeafPos);
-				startNode->removeLeaf(nextLeafPos - 1);
-
-				startNode->removeKey(nextLeafPos - 1);
-
-				startNode->insertLeafAt(mergedNode, nextLeafPos - 1);
-			}
-
-			else if (rightNeighbourNode != nullptr)
-			{
-				if (!nextNode->isLeaf())
-				{
-					for (size_t i = 0; i < nextNode->getNumberOfLeaves(); i++)
-						mergedNode->pushLeaf(nextNode->getLeaf(i));
-					for (size_t i = 0; i < rightNeighbourNode->getNumberOfLeaves(); i++)
-						mergedNode->pushLeaf(rightNeighbourNode->getLeaf(i));
+				try {
+					newNode->addKey(nodeL->getKey(0));
+					newNode->addKey(first->getKey(nextLeafIndex - 1));
+					newNode->addKey(nextNode->getKey(0));
 				}
-
-				mergedNode->addKey(nextNode->getKey(0));
-				mergedNode->addKey(startNode->getKey(nextLeafPos));
-				mergedNode->addKey(rightNeighbourNode->getKey(0));
-
-				startNode->removeLeaf(nextLeafPos + 1);
-				startNode->removeLeaf(nextLeafPos);
-
-				startNode->removeKey(nextLeafPos);
-
-				startNode->insertLeafAt(mergedNode, nextLeafPos);
+				catch (logic_error error) {
+					cout << error.what();
+				}
+				first->deleteLeaf(nextLeafIndex);
+				first->deleteLeaf(nextLeafIndex - 1);
+				first->deleteKey(nextLeafIndex - 1);
+				first->addLeaf(newNode, nextLeafIndex - 1);
 			}
-			nextNode = mergedNode;
+
+			else if (nodeR != nullptr) {
+				if (!nextNode->isLeaf()) {
+					for (int i = 0; i < nextNode->getNumberOfLeaves(); i++) {
+						newNode->addLeaf(nextNode->getLeaf(i));
+					}
+					for (int i = 0; i < nodeR->getNumberOfLeaves(); i++) {
+						newNode->addLeaf(nodeR->getLeaf(i));
+					}
+				}
+				try {
+					newNode->addKey(nextNode->getKey(0));
+					newNode->addKey(first->getKey(nextLeafIndex));
+					newNode->addKey(nodeR->getKey(0));
+				}
+				catch (logic_error error) {
+					cout << error.what();
+				}
+				first->deleteLeaf(nextLeafIndex + 1);
+				first->deleteLeaf(nextLeafIndex);
+				first->deleteKey(nextLeafIndex);
+				first->addLeaf(newNode, nextLeafIndex);
+			}
+			nextNode = newNode;
 		}
 	}
 
-	_deleteKey(keyToDelete, nextNode, nodeToDelete);
+	recDeleteKey(delKey, nextNode, delNode);
 
 }
 
 template<typename T>
-void Tree234<T>::_addKey(T key, shared_ptr<Node<T>> startNode, shared_ptr<Node<T>> parentNode)
+vector<T> Tree234<T>::findNext(Node<T>* node, T key)
 {
+	vector<T> temp;
+	temp.push_back(key);
+	temp.reserve(temp.size() + node->getKeys().size());
+	temp.insert(temp.end(), node->getKeys().begin(), node->getKeys().end());
+	sort(temp.begin(), temp.end());
+	return temp;
+}
 
-	if (startNode->getNumberOfKeys() >= 3)
+template<typename T>
+void Tree234<T>::recAddKey(T key, Node<T>*first, Node<T>*upperNode)
+{
+	if (first->getNumberOfKeys() >= 3)
 	{
-		size_t medianPos = startNode->getMedianPos();
-		shared_ptr<Node<T>> leftNewNode(new Node<T>());
-		shared_ptr<Node<T>> rightNewNode(new Node<T>());
+		unsigned int medianIndex = first->getMedianIndex();
+		Node<T>*leftNewNode(new Node<T>());
+		Node<T>*rightNewNode(new Node<T>());
 
-		for (size_t i = 0; i < medianPos; i++)
-			leftNewNode->addKey(startNode->getKey(i));
-		for (size_t i = medianPos + 1; i < startNode->getKeys().size(); i++)
-			rightNewNode->addKey(startNode->getKey(i));
-
-		int leafPos = 0;
-
-		if (!startNode->isLeaf())
-		{
-			for (size_t i = 0; i <= medianPos; i++)
-				leftNewNode->pushLeaf(startNode->getLeaf(i));
-			for (size_t i = medianPos + 1; i < startNode->getLeaves().size(); i++)
-				rightNewNode->pushLeaf(startNode->getLeaf(i));
-
+		for (unsigned int i = 0; i < medianIndex; i++) {
+			try {
+				leftNewNode->addKey(first->getKey(i));
+			}
+			catch (logic_error error) {
+				cout << error.what();
+			}
+		}
+		for (unsigned int i = medianIndex + 1; i < first->getKeys().size(); i++) {
+			try {
+				rightNewNode->addKey(first->getKey(i));
+			}
+			catch (logic_error error) {
+				cout << error.what();
+			}
 		}
 
-		if (startNode == m_root)
-		{
-			parentNode.reset(new Node<T>());
-			m_root = parentNode;
+		int leafIndex = 0;
+
+		if (!first->isLeaf()) {
+			for (unsigned int i = 0; i <= medianIndex; i++) {
+				leftNewNode->addLeaf(first->getLeaf(i));
+			}
+			for (unsigned int i = medianIndex + 1; i < first->getLeaves().size(); i++) {
+				rightNewNode->addLeaf(first->getLeaf(i));
+			}
 		}
-		else
-		{
-			leafPos = find(parentNode->getLeaves().begin(), parentNode->getLeaves().end(), startNode) - parentNode->getLeaves().begin();
-			parentNode->removeLeaf(leafPos);
+		if (first == m_head) {
+			upperNode = new Node<T>;
+			m_head = upperNode;
+		}
+		else {
+			leafIndex = std::find(upperNode->getLeaves().begin(), upperNode->getLeaves().end(), first) - upperNode->getLeaves().begin();
+			upperNode->deleteLeaf(leafIndex);
 		}
 
-		T medianKey = startNode->getKey(medianPos);
-		parentNode->addKey(medianKey);
-
-		parentNode->insertLeafAt(leftNewNode, leafPos);
-		parentNode->insertLeafAt(rightNewNode, leafPos + 1);
-
-		startNode = parentNode;
-	}
-
-	if (startNode->isLeaf()) {
+		T medianKey = first->getKey(medianIndex);
 		try {
-			startNode->addKey(key);
+			upperNode->addKey(medianKey);
 		}
 		catch (logic_error error) {
 			cout << error.what();
 		}
-			
+		upperNode->addLeaf(leftNewNode, leafIndex);
+		upperNode->addLeaf(rightNewNode, leafIndex + 1);
+		first = upperNode;
 	}
-	else
-	{
-		vector<T> sumKeys;
-		sumKeys.push_back(key);
-		sumKeys.reserve(sumKeys.size() + startNode->getKeys().size());
-		sumKeys.insert(sumKeys.end(), startNode->getKeys().begin(), startNode->getKeys().end());
-		sort(sumKeys.begin(), sumKeys.end());
-		int nextleafPos = find(sumKeys.begin(), sumKeys.end(), key) - sumKeys.begin();
-		_addKey(key, startNode->getLeaf(nextleafPos), startNode);
+
+	if (first->isLeaf()) {
+		try {
+			first->addKey(key);
+		}
+		catch (logic_error error) {
+			cout << error.what();
+		}
+	}
+	else {
+		vector<T> temp = findNext(first, key);
+		int nextLeafIndex = std::find(temp.begin(), temp.end(), key) - temp.begin();
+		recAddKey(key, first->getLeaf(nextLeafIndex), first);
 	}
 }
 

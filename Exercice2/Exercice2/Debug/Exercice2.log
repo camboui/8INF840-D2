@@ -1,0 +1,16 @@
+﻿Build started 24/10/2016 20:19:14.
+     1>Project "C:\Users\Porc\Desktop\UQAC\Structure données 8INF840\TPs\TP2\Exercice2\Exercice2\Exercice2.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Source.cpp
+         Source.cpp
+     1>c:\users\porc\desktop\uqac\structure données 8inf840\tps\tp2\exercice2\exercice2\tree234.h(255): error C2244: 'Tree234<T>::findNext': unable to match function definition to an existing declaration
+         c:\users\porc\desktop\uqac\structure données 8inf840\tps\tp2\exercice2\exercice2\tree234.h(247): note: see declaration of 'Tree234<T>::findNext'
+         c:\users\porc\desktop\uqac\structure données 8inf840\tps\tp2\exercice2\exercice2\tree234.h(255): note: definition
+         c:\users\porc\desktop\uqac\structure données 8inf840\tps\tp2\exercice2\exercice2\tree234.h(255): note: 'std::vector<T,std::allocator<_Ty>> Tree234<T>::findNext(Node<T> *,T)'
+         c:\users\porc\desktop\uqac\structure données 8inf840\tps\tp2\exercice2\exercice2\tree234.h(255): note: existing declarations
+         c:\users\porc\desktop\uqac\structure données 8inf840\tps\tp2\exercice2\exercice2\tree234.h(255): note: 'Node<T> *Tree234<T>::findNext(Node<T> *,T)'
+     1>Done Building Project "C:\Users\Porc\Desktop\UQAC\Structure données 8INF840\TPs\TP2\Exercice2\Exercice2\Exercice2.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.38
