@@ -142,7 +142,6 @@ template<typename T>
 void insertCase1(RedBlackNode<T>* node)
 {
 	if (node->getParentNode() == nullptr) {
-		//node is the head of the tree
 		node->setColor(BLACK);
 	}
 	else {
@@ -154,7 +153,7 @@ template<typename T>
 void insertCase2(RedBlackNode<T>* node)
 {
 	if (node->getParentNode()->getColor() == BLACK) {
-		return; /* Tree is still valid */
+		return;
 	}
 	else {
 		insertCase3(node);
