@@ -148,10 +148,8 @@
   <ItemGroup>
     <ClCompile Include="Lego.cpp" />
     <ClCompile Include="LegoParser.cpp" />
-<<<<<<< HEAD
-=======
+
     <ClCompile Include="Node234.cpp" />
->>>>>>> 598f57f6cdd826d8c77b9f9b71d669852cf52dad
     <ClCompile Include="RedBlackNode.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
@@ -162,10 +160,7 @@
   <ItemGroup>
     <ClInclude Include="Lego.h" />
     <ClInclude Include="LegoParser.h" />
-<<<<<<< HEAD
-=======
     <ClInclude Include="Node234.h" />
->>>>>>> 598f57f6cdd826d8c77b9f9b71d669852cf52dad
     <ClInclude Include="RedBlackNode.h" />
     <ClInclude Include="RedBlackTree.h" />
     <ClInclude Include="Tree234.h" />
