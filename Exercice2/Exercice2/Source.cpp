@@ -14,8 +14,15 @@ using namespace std;
 int main()
 {
 	
-	LegoParser lp("50_pieces.txt");
-	vector<Lego> legos = lp.parseFile();
+	LegoParser* lp = nullptr;
+	try {
+		lp = new LegoParser("50_pieces.txt");
+	}
+	catch (exception e) {
+		cout << "Error : " << e.what() << endl;
+		return -1;
+	}
+	vector<Lego> legos = lp->parseFile();
 	Tree234<Lego> tree;
 
 
