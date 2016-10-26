@@ -257,7 +257,7 @@ void Tree234<T>::recDeleteKey(const T & delKey, Node234<T>* first, Node234<T>* d
 			}
 			newNode->deleteKey(newNode->getNumberOfLeaves() - 1);
 		}
-		else if (nodeR != nullptr && nodeR->getNumberOfLeaves() != 1)
+		else if (nodeR != nullptr && nodeR->getNumberOfKeys() != 1)
 		{
 			newNode = nodeR;
 			try {
@@ -279,6 +279,9 @@ void Tree234<T>::recDeleteKey(const T & delKey, Node234<T>* first, Node234<T>* d
 				cout << error.what();
 			}
 			newNode->deleteKey(0);
+
+			if (newNode->getLeaves().size() == 1)
+				throw logic_error("ERREUR DU YOLO");
 		}
 		else {
 			newNode = new Node234<T>();
@@ -304,6 +307,9 @@ void Tree234<T>::recDeleteKey(const T & delKey, Node234<T>* first, Node234<T>* d
 				first->deleteLeaf(nextLeafIndex - 1);
 				first->deleteKey(nextLeafIndex - 1);
 				first->addLeaf(newNode, nextLeafIndex - 1);
+
+				if (first->getLeaves().size() == 1)
+					throw logic_error("ERREUR DU YOLO");
 			}
 
 			else if (nodeR != nullptr) {
@@ -327,8 +333,13 @@ void Tree234<T>::recDeleteKey(const T & delKey, Node234<T>* first, Node234<T>* d
 				first->deleteLeaf(nextLeafIndex);
 				first->deleteKey(nextLeafIndex);
 				first->addLeaf(newNode, nextLeafIndex);
+				if (first->getLeaves().size() == 1)
+					throw logic_error("ERREUR DU YOLO");
 			}
 			nextNode = newNode;
+
+			if (nextNode->getLeaves().size() == 1)
+				throw logic_error("ERREUR DU YOLO");
 		}
 	}
 
