@@ -16,7 +16,7 @@ public:
 	Node234<T>* findNode(const T & key);
 	void addKey(const T & key);
 	void deleteKey(const T & key);
-	RedBlackTree<T>* toRBTree();
+	RedBlackTree<T> toRBTree();
 private:
 
 	Node234<T>* m_head;
@@ -70,7 +70,7 @@ Node234<T>* Tree234<T>::recFindNode(const T & key, Node234<T>* first)
 		return nullptr;
 
 	vector<T> temp = findNext(first, key);
-	int leafIndex = std::find(compareKeys.begin(), compareKeys.end(), key) - compareKeys.begin();
+	int leafIndex = std::find(temp.begin(), temp.end(), key) - temp.begin();
 	return recFindNode(key, first->getLeaf(leafIndex));
 }
 
@@ -88,9 +88,9 @@ void Tree234<T>::deleteKey(const T & delKey)
 }
 
 template<typename T>
-RedBlackTree<T>* Tree234<T>::toRBTree()
+RedBlackTree<T> Tree234<T>::toRBTree()
 {
-	return RedBlackTree(rectoRBTree(m_head,nullptr));
+	return RedBlackTree<T>(rectoRBTree(m_head,nullptr));
 }
 
 template<typename T>
@@ -104,13 +104,12 @@ RedBlackNode<T>* Tree234<T>::rectoRBTree(Node234<T>* n, RedBlackNode<T>* parent)
 			newNode->setColor(RED);
 		}
 	}
-	if (nbLeaves == 2) {
+	else if (nbLeaves == 2) {
 
 		RedBlackNode<T>* newNode = new RedBlackNode<T>(BLACK, n->getKey(0));
 		newNode->setParentNode(parent);
 		newNode->setLeftNode(rectoRBTree(n->getLeaf(0), newNode));
 		newNode->setRightNode(rectoRBTree(n->getLeaf(1), newNode));
-
 	}
 	else if (nbLeaves == 3) {
 		RedBlackNode<T>* newNodeR = new RedBlackNode<T>(RED, n->getKey(0));
@@ -132,15 +131,14 @@ RedBlackNode<T>* Tree234<T>::rectoRBTree(Node234<T>* n, RedBlackNode<T>* parent)
 		newNodeR1->setParentNode(newNodeB);
 		newNodeR2->setParentNode(newNodeB);
 
-		newNodeB->setLeftNode(newNodeR1, newNodeB);
-		newNodeB->setLeftNode(newNodeR2, newNodeB);
+		newNodeB->setLeftNode(newNodeR1);
+		newNodeB->setLeftNode(newNodeR2);
 
 		newNodeR1->setLeftNode(rectoRBTree(n->getLeaf(0), newNodeR1));
 		newNodeR1->setRightNode(rectoRBTree(n->getLeaf(1), newNodeR1));
 
 		newNodeR2->setLeftNode(rectoRBTree(n->getLeaf(2), newNodeR2));
 		newNodeR2->setRightNode(rectoRBTree(n->getLeaf(3), newNodeR2));
-
 	}
 	else {
 		throw logic_error("to many leaves for a 234 tree");
@@ -352,7 +350,7 @@ void Tree234<T>::recAddKey(T key, Node234<T>* first, Node234<T>* upperNode)
 			}
 		}
 		if (first == m_head) {
-			upperNode = new Node234;
+			upperNode = new Node234<T>();
 			m_head = upperNode;
 		}
 		else {
