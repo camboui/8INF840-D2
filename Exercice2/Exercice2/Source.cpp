@@ -5,12 +5,11 @@
 #include "Tree234.h"
 #include "RedBlackTree.h"
 #include "LegoParser.h"
+#include "TreeConverter.h"
 
 using namespace std;
 
 
-template<typename T>
-Tree234<T> convertRedBlackTreeIntoTree234(RedBlackTree<T> rbtree);
 
 int main()
 {
@@ -59,7 +58,7 @@ int main()
 	}
 	*/
 	cout << endl << "Transforming to Red Black Tree..." << endl;
-	RedBlackTree<Lego> rbtree = tree.toRBTree();
+	RedBlackTree<Lego> rbtree = toRedBlackTree(tree);
 
 	for (unsigned int i = 0; i < legos.size(); i++) {
 		RedBlackNode<Lego>* n = rbtree.findKey(legos[i]);
@@ -72,7 +71,7 @@ int main()
 	}
 
 	Tree234<Lego> newtree234 = Tree234<Lego>();
-	newtree234 = convertRedBlackTreeIntoTree234(rbtree);
+	newtree234 = toTree234(rbtree);
 	for (unsigned int i = 0; i < legos.size(); i++) {
 		Node234<Lego>* n = tree.findNode(legos[i]);
 		cout << legos[i].getId().c_str() << ", value found on node : ";
@@ -128,50 +127,6 @@ int main()
 	return 0;
 }
 
-
-
-
-template<typename T>
-RedBlackNode<T>* nextLeaf(RedBlackNode<T>* node)
-{
-	if (node != nullptr) {
-		if (node->getLeftNode() != nullptr) {
-			return nextLeaf(node->getLeftNode());
-		}
-		else if (node->getRightNode() != nullptr) {
-			return nextLeaf(node->getRightNode());
-		}
-		else {
-			if (node->getParentNode() != nullptr) {
-				if (node->getParentNode()->getLeftNode() == node) {
-					node->getParentNode()->setLeftNode(nullptr);
-				}
-				else {
-					node->getParentNode()->setRightNode(nullptr);
-				}
-			}
-			RedBlackNode<T>* tmp = node;
-			node = nullptr;
-			return tmp;
-		}
-	}
-	return nullptr;
-}
-
-template<typename T>
-Tree234<T> convertRedBlackTreeIntoTree234(RedBlackTree<T> rbtree)
-{
-	Tree234<T> tree = Tree234<T>();
-	RedBlackNode<T>* current = new RedBlackNode<T>();
-	RedBlackNode<T>* prev = new RedBlackNode<T>();
-	current = nextLeaf(rbtree.m_head);
-	while (current != prev) {
-		tree.addKey(current->getKey());
-		prev = current;
-		current = nextLeaf(rbtree.m_head);
-	}
-	return tree;
-}
 
 
 

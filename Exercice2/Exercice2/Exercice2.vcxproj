@@ -148,7 +148,6 @@
   <ItemGroup>
     <ClCompile Include="Lego.cpp" />
     <ClCompile Include="LegoParser.cpp" />
-
     <ClCompile Include="Node234.cpp" />
     <ClCompile Include="RedBlackNode.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -164,6 +163,7 @@
     <ClInclude Include="RedBlackNode.h" />
     <ClInclude Include="RedBlackTree.h" />
     <ClInclude Include="Tree234.h" />
+    <ClInclude Include="TreeConverter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
