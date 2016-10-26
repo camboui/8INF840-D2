@@ -17,9 +17,9 @@ public:
 	void addKey(const T & key);
 	void deleteKey(const T & key);
 	RedBlackTree<T> toRBTree();
-private:
-
 	Node234<T>* m_head;
+
+private:
 	vector<T> findNext(Node234<T>* node, T key);
 	void recAddKey(T key, Node234<T>* first, Node234<T>* upperNode);
 	void recDeleteKey(const T& delKey, Node234<T>* first, Node234<T>* delNode);
@@ -173,6 +173,7 @@ RedBlackNode<T>* Tree234<T>::rectoRBTree(Node234<T>* n, RedBlackNode<T>* parent)
 		return newNodeB;
 	}
 	else {
+		cout << nbLeaves << endl;
 		throw logic_error("to many leaves for a 234 tree");
 	}
 }
@@ -189,8 +190,9 @@ void Tree234<T>::recDeleteKey(const T & delKey, Node234<T>* first, Node234<T>* d
 
 	int keyIndex = std::find(first->getKeys().begin(), first->getKeys().end(), delKey) - first->getKeys().begin();
 
-	if (keyIndex != first->getNumberOfKeys())
+	if (keyIndex != first->getNumberOfKeys()) {
 		delNode = first;
+	}
 
 	if (first->isLeaf()) {
 		if (first == delNode) {
@@ -216,7 +218,7 @@ void Tree234<T>::recDeleteKey(const T & delKey, Node234<T>* first, Node234<T>* d
 		throw logic_error("Key not found in the tree");
 	}
 
-	temp = findNext(delNode, delKey);
+	temp = findNext(first, delKey);
 	if (delNode == nullptr) {
 		nextLeafIndex = std::find(temp.begin(), temp.end(), delKey) - temp.begin();
 	}

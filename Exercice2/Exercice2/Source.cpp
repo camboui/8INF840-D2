@@ -48,7 +48,7 @@ int main()
 	Node234<Lego>* n = tree.findNode(legos[0]);
 	cout << "Found node : " << endl;
 	cout << n->getKey(0).getId().c_str() << "," << n->getKey(0).getDescription().c_str() << "," << n->getKey(0).getCategory().c_str() << endl;
-	/*
+	
 	tree.deleteKey(legos[0]);
 	n = tree.findNode(legos[0]);
 	if ( n == nullptr){
@@ -57,7 +57,7 @@ int main()
 	else{
 		cout << "deletion failed : " << n->getKey(0).getId() << " <-> " << legos[0].getId() << endl;
 	}
-	*/
+	
 	cout << endl << "Transforming to Red Black Tree..." << endl;
 	RedBlackTree<Lego> rbtree = tree.toRBTree();
 
