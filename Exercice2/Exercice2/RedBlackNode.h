@@ -16,9 +16,16 @@ public:
 	RedBlackNode<T>*	getLeftNode()			{ return m_left;	};
 	RedBlackNode<T>*	getRightNode()			{ return m_right;	};
 	RedBlackNode<T>*	getParentNode()			{ return m_parent;	};
-	RedBlackNode<T>*	getUncleNode()			{ if (getGrandParentNode() == nullptr) return nullptr;
-												  else if (getGrandParentNode()->getLeftNode() == m_parent) return getGrandParentNode()->getRightNode(); 
-												  else return getGrandParentNode()->getLeftNode(); };
+	RedBlackNode<T>*	getUncleNode() {
+		if (getGrandParentNode() == nullptr) return nullptr;
+		else if (getGrandParentNode()->getLeftNode() == m_parent) return getGrandParentNode()->getRightNode();
+		else return getGrandParentNode()->getLeftNode();
+	};
+	RedBlackNode<T>*	getBrotherNode() {
+		if (getParent() == nullptr) return nullptr;
+		else if (getParentNode()->getLeftNode() == this) return getParentNode()->getRightNode();
+		else return getParentNode()->getLeftNode();
+	};
 	RedBlackNode<T>*	getGrandParentNode()	{ if (m_parent) return m_parent->getParentNode(); else return nullptr; };
 	T					getKey()				{ return m_key;		};
 
