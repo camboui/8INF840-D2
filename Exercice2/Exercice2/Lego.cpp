@@ -36,3 +36,8 @@ bool operator==(Lego const& l1, Lego const& l2)
 {
 	return l1.getId() == l2.getId();
 }
+
+bool operator!=(Lego const & l1, Lego const & l2)
+{
+	return l1.getId() != l2.getId();
+}

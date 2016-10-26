@@ -12,9 +12,8 @@ public:
 	RedBlackTree<T>(RedBlackNode<T>* head);
 	RedBlackNode<T>*	findKey(T key);
 	void				addKey(T key);
-
-private:
 	RedBlackNode<T>*	m_head;
+private:
 	RedBlackNode<T>*	recFindKey(T key, RedBlackNode<T>* node);
 	void				recAddKey(T key, RedBlackNode<T>* node);
 };

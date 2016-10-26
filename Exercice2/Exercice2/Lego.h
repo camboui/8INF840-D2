@@ -28,6 +28,7 @@ private:
 bool operator>(Lego const& l1, Lego const& l2);
 bool operator<(Lego const& l1, Lego const& l2);
 bool operator==(Lego const& l1, Lego const& l2);
+bool operator!=(Lego const& l1, Lego const& l2);
 
 
 #endif

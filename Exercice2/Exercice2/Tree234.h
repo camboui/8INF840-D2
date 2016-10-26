@@ -339,7 +339,7 @@ vector<T> Tree234<T>::findNext(Node234<T>* node, T key)
 {
 	vector<T> temp;
 	temp.push_back(key);
-	temp.reserve(temp.size() + node->getKeys().size());
+	//temp.reserve(temp.size() + node->getKeys().size());
 	temp.insert(temp.end(), node->getKeys().begin(), node->getKeys().end());
 	sort(temp.begin(), temp.end());
 	return temp;
