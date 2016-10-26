@@ -13,30 +13,50 @@ using namespace std;
 
 int main()
 {
-	
+	/*Read the file and convert to a vector of Lego*/
 	LegoParser* lp = nullptr;
 	try {
 		lp = new LegoParser("50_pieces.txt");
 	}
 	catch (exception e) {
 		cout << "Error : " << e.what() << endl;
+		system("pause");
 		return -1;
 	}
 	vector<Lego> legos = lp->parseFile();
+	if (legos.size()>0) {
+		cout << "There are " << legos.size() << "Lego in the file" << endl;
+	}
+	else {
+		cout << "There is any Lego in the file" << endl;
+	}
+	/*End of reading*/
+
+
+	/*First creation of a 2-3-4 Tree*/
 	Tree234<Lego> tree;
-
-
 	if (tree.isEmpty()) {
 		cout << "tree is empty" << endl;
 	}
 	else {
 		cout << "tree is not empty" << endl;
 	}
-
 	for (unsigned int i = 0; i < legos.size(); i++){
+		//We had each Lego of the file in the 2-3-4 Tree
 		tree.addKey(legos[i]);
+		//If you uncomment the next line you will see informations about the current added Lego
 		//cout << legos[i].getId().c_str() << "," << legos[i].getDescription().c_str() << "," << legos[i].getCategory().c_str() << endl;
 	}
+	cout << endl;
+	if (tree.isEmpty()) {
+		cout << "tree is empty" << endl;
+	}
+	else {
+		cout << "tree is not empty" << endl;
+	}
+	/*End of creation*/
+
+	//Print all nodes of the 2-3-4 Tree
 	for (unsigned int i = 0; i < legos.size(); i++) {
 		Node234<Lego>* n = tree.findNode(legos[i]);
 		cout << legos[i].getId().c_str() << ", value found on node : ";
@@ -46,13 +66,7 @@ int main()
 		cout << endl;
 	}
 
-	cout << endl;
-	if (tree.isEmpty()) {
-		cout << "tree is empty" << endl;
-	}
-	else {
-		cout << "tree is not empty" << endl;
-	}
+	/*Checking if deletion works*/
 	Node234<Lego>* n = tree.findNode(legos[0]);
 	cout << "Found node : " << endl;
 	cout << n->getKey(0).getId().c_str() << "," << n->getKey(0).getDescription().c_str() << "," << n->getKey(0).getCategory().c_str() << endl;
@@ -65,10 +79,12 @@ int main()
 	else{
 		cout << "deletion failed : " << n->getKey(0).getId() << " <-> " << legos[0].getId() << endl;
 	}
+	/*End of checking*/
 	
+	/*Conversion 2-3-4 Tree to Red-Black Tree*/
 	cout << endl << "Transforming to Red Black Tree..." << endl;
 	RedBlackTree<Lego> rbtree = toRedBlackTree(tree);
-
+	//Print all Node's color
 	for (unsigned int i = 0; i < legos.size(); i++) {
 		RedBlackNode<Lego>* n = rbtree.findKey(legos[i]);
 		if (n != nullptr) {
@@ -78,10 +94,13 @@ int main()
 				cout << n->getKey().getId().c_str() << ": BLACK" << endl;
 		}
 	}
+	/*End of Conversion*/
 
 	cout << endl;
+	/*Conversion of Red-Black Tree to 2-3-4 Tree*/
 	Tree234<Lego> newtree234 = Tree234<Lego>();
 	newtree234 = toTree234(rbtree);
+	//Print all nodes of the 2-3-4 Tree
 	for (unsigned int i = 0; i < legos.size(); i++) {
 		Node234<Lego>* n = tree.findNode(legos[i]);
 		if (n != nullptr) {
@@ -92,6 +111,9 @@ int main()
 		}
 		cout << endl;
 	}
+	/*End of Conversion*/
+
+
 
 	/* TESTS ON INTEGERS 
 
