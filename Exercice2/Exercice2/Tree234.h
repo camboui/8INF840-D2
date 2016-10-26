@@ -64,10 +64,12 @@ template<typename T>
 Node234<T>* Tree234<T>::recFindNode(const T & key, Node234<T>* first)
 {
 	vector<T> keys = first->getKeys();
-	if (std::find(keys.begin(), keys.end(), key) != keys.end())
+	if (std::find(keys.begin(), keys.end(), key) != keys.end()) {
 		return first;
-	if (first->isLeaf())
+	}
+	if (first->isLeaf()) {
 		return nullptr;
+	}
 
 	vector<T> temp = findNext(first, key);
 	int leafIndex = std::find(temp.begin(), temp.end(), key) - temp.begin();
@@ -90,7 +92,7 @@ void Tree234<T>::deleteKey(const T & delKey)
 template<typename T>
 RedBlackTree<T> Tree234<T>::toRBTree()
 {
-	return RedBlackTree<T>(rectoRBTree(m_head,nullptr));
+	return RedBlackTree<T>(rectoRBTree(m_head, nullptr));
 }
 
 template<typename T>
@@ -98,18 +100,44 @@ RedBlackNode<T>* Tree234<T>::rectoRBTree(Node234<T>* n, RedBlackNode<T>* parent)
 {
 	int nbLeaves = n->getLeaves().size();
 	if (nbLeaves == 0) {
-		RedBlackNode<T>* newNode = new RedBlackNode<T>(BLACK, n->getKey(0));
-		newNode->setParentNode(parent);
-		if (parent != nullptr) {
-			newNode->setColor(RED);
+		int nbKeys = n->getKeys().size();
+		if (nbKeys == 1) {
+			RedBlackNode<T>* newNode = new RedBlackNode<T>(BLACK, n->getKey(0));
+			newNode->setParentNode(parent);
+			if (parent != nullptr) {
+				newNode->setColor(RED);
+			}
+			return newNode;
+		}
+		else if (nbKeys == 2) {
+			RedBlackNode<T>* newNodeR = new RedBlackNode<T>(RED, n->getKey(0));
+			RedBlackNode<T>* newNodeB = new RedBlackNode<T>(BLACK, n->getKey(1));
+			newNodeR->setParentNode(newNodeB);
+			newNodeB->setParentNode(parent);
+
+			newNodeB->setLeftNode(newNodeR);
+			return newNodeB;
+		}
+		else if (nbKeys == 3) {
+			RedBlackNode<T>* newNodeB = new RedBlackNode<T>(BLACK, n->getKey(1));
+			RedBlackNode<T>* newNodeR1 = new RedBlackNode<T>(RED, n->getKey(0));
+			RedBlackNode<T>* newNodeR2 = new RedBlackNode<T>(RED, n->getKey(2));
+			newNodeB->setParentNode(parent);
+			newNodeR1->setParentNode(newNodeB);
+			newNodeR2->setParentNode(newNodeB);
+
+			newNodeB->setLeftNode(newNodeR1);
+			newNodeB->setRightNode(newNodeR2);
+
+			return newNodeB;
 		}
 	}
 	else if (nbLeaves == 2) {
-
 		RedBlackNode<T>* newNode = new RedBlackNode<T>(BLACK, n->getKey(0));
 		newNode->setParentNode(parent);
 		newNode->setLeftNode(rectoRBTree(n->getLeaf(0), newNode));
 		newNode->setRightNode(rectoRBTree(n->getLeaf(1), newNode));
+		return newNode;
 	}
 	else if (nbLeaves == 3) {
 		RedBlackNode<T>* newNodeR = new RedBlackNode<T>(RED, n->getKey(0));
@@ -122,6 +150,8 @@ RedBlackNode<T>* Tree234<T>::rectoRBTree(Node234<T>* n, RedBlackNode<T>* parent)
 
 		newNodeR->setLeftNode(rectoRBTree(n->getLeaf(0), newNodeR));
 		newNodeR->setRightNode(rectoRBTree(n->getLeaf(1), newNodeR));
+
+		return newNodeB;
 	}
 	else if (nbLeaves == 4) {
 		RedBlackNode<T>* newNodeB = new RedBlackNode<T>(BLACK, n->getKey(1));
@@ -132,13 +162,15 @@ RedBlackNode<T>* Tree234<T>::rectoRBTree(Node234<T>* n, RedBlackNode<T>* parent)
 		newNodeR2->setParentNode(newNodeB);
 
 		newNodeB->setLeftNode(newNodeR1);
-		newNodeB->setLeftNode(newNodeR2);
+		newNodeB->setRightNode(newNodeR2);
 
 		newNodeR1->setLeftNode(rectoRBTree(n->getLeaf(0), newNodeR1));
 		newNodeR1->setRightNode(rectoRBTree(n->getLeaf(1), newNodeR1));
 
 		newNodeR2->setLeftNode(rectoRBTree(n->getLeaf(2), newNodeR2));
 		newNodeR2->setRightNode(rectoRBTree(n->getLeaf(3), newNodeR2));
+
+		return newNodeB;
 	}
 	else {
 		throw logic_error("to many leaves for a 234 tree");

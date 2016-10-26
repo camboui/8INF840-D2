@@ -1,9 +1,9 @@
-﻿Build started 25/10/2016 21:14:34.
+﻿Build started 25/10/2016 23:06:37.
      1>Project "C:\Users\Porc\Desktop\UQAC\Structure données 8INF840\TPs\TP2\Exercice2\Exercice2\Exercice2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Source.cpp
          Source.cpp
-     1>c:\users\porc\desktop\uqac\structure données 8inf840\tps\tp2\exercice2\exercice2\tree234.h(146): warning C4715: 'Tree234<int>::rectoRBTree': not all control paths return a value
+     1>c:\users\porc\desktop\uqac\structure données 8inf840\tps\tp2\exercice2\exercice2\tree234.h(178): warning C4715: 'Tree234<int>::rectoRBTree': not all control paths return a value
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Porc\Desktop\UQAC\Structure données 8INF840\TPs\TP2\Exercice2\Debug\Exercice2.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Porc\Desktop\UQAC\Structure données 8INF840\TPs\TP2\Exercice2\Debug\Exercice2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Porc\Desktop\UQAC\Structure données 8INF840\TPs\TP2\Exercice2\Debug\Exercice2.lib" /MACHINE:X86 Debug\Lego.obj
          Debug\LegoParser.obj
@@ -15,4 +15,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.77
+Time Elapsed 00:00:00.83

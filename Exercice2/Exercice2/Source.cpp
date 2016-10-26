@@ -50,6 +50,7 @@ int main()
 	*/
 
 	vector<int> vals = { 4,35,10,13,3,30,15,12,7,40,20,11,6 };
+	//vector<int> vals = { 1,2,3,4 };
 	Tree234<int> tree234;
 	for (unsigned int i = 0; i < vals.size(); i++) {
 		tree234.addKey(vals[i]);
@@ -57,9 +58,14 @@ int main()
 
 	for (unsigned int i = 0; i < vals.size(); i++) {
 		Node234<int>* n = tree234.findNode(vals[i]);
+		cout << vals[i] << ", value found on node : ";
+		for (unsigned int j = 0; j < n->getKeys().size(); j++) {
+			cout << n->getKey(j) << " | ";
+		}
+		cout << endl;
 	}
 
-
+	cout << endl << "Transforming to Red Black Tree..." << endl;
 	RedBlackTree<int> rbtree = tree234.toRBTree();
 
 	for (unsigned int i = 0; i < vals.size(); i++) {
@@ -72,26 +78,6 @@ int main()
 		}
 	}
 
-
-	//RedBlackTree<int> rbtree = RedBlackTree<int>();
-	//
-	//rbtree.addKey(04);
-	//rbtree.addKey(35);
-	//rbtree.addKey(10);
-	//rbtree.addKey(13);
-	//rbtree.addKey(03);
-	//rbtree.addKey(30);
-	//rbtree.addKey(15);
-	//rbtree.addKey(12);
-	//rbtree.addKey(07);
-	//rbtree.addKey(40);
-	//rbtree.addKey(20);
-	//rbtree.addKey(11);
-	//rbtree.addKey(06);
-
-
-
-	
 	system("pause");
 	return 0;
 }
