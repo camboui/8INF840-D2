@@ -12,13 +12,11 @@ public:
 	RedBlackTree<T>(RedBlackNode<T>* head);
 	RedBlackNode<T>*	findKey(T key);
 	void				addKey(T key);
-	void				deleteKey(T key);
 
 private:
 	RedBlackNode<T>*	m_head;
 	RedBlackNode<T>*	recFindKey(T key, RedBlackNode<T>* node);
 	void				recAddKey(T key, RedBlackNode<T>* node);
-	void				recDeleteKey(T key);
 };
 
 template <typename T>
@@ -140,15 +138,6 @@ void RedBlackTree<T>::recAddKey(T key, RedBlackNode<T>* node)
 }
 
 
-template<typename T>
-void RedBlackTree<T>::deleteKey(T key)
-{
-}
-
-template<typename T>
-void RedBlackTree<T>::recDeleteKey(T key)
-{
-}
 
 template<typename T>
 void insertCase1(RedBlackNode<T>* node)
