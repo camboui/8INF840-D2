@@ -147,8 +147,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Lego.cpp" />
-    <ClCompile Include="Node.cpp" />
     <ClCompile Include="LegoParser.cpp" />
+    <ClCompile Include="RedBlackNode.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,8 +157,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lego.h" />
-    <ClInclude Include="Node.h" />
     <ClInclude Include="LegoParser.h" />
+    <ClInclude Include="RedBlackNode.h" />
+    <ClInclude Include="RedBlackTree.h" />
     <ClInclude Include="Tree234.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

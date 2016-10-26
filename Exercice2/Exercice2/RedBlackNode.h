@@ -10,6 +10,7 @@ class RedBlackNode
 public:
 	RedBlackNode();
 	RedBlackNode(int color, T key);
+	RedBlackNode(int color, T key, RedBlackNode<T>* parent, RedBlackNode<T>* left, RedBlackNode<T>* right);
 	RedBlackNode<T>& operator=(const RedBlackNode<T> &copy);
 	int					getColor()				{ return m_color;	};
 	RedBlackNode<T>*	getLeftNode()			{ return m_left;	};
@@ -51,6 +52,29 @@ RedBlackNode<T>::RedBlackNode(int color, T key):
 	m_left   = nullptr;
 	m_right  = nullptr;
 	m_parent = nullptr;
+}
+
+template<typename T>
+RedBlackNode<T>::RedBlackNode(int color, T key, RedBlackNode<T>* parent, RedBlackNode<T>* left, RedBlackNode<T>* right):
+	m_color(color),
+	m_key(key),
+	m_left(left),
+	m_right(right),
+	m_parent(parent)
+{
+	if (left != nullptr) {
+		left->m_parent = this;
+	}
+	if (right != nullptr) {
+		right->m_parent = this;
+	}
+	if (parent != nullptr)
+		if (parent->m_key > key) {
+			parent->m_left = this;
+		}
+		else {
+			parent->m_right = this;
+		}
 }
 
 template<typename T>

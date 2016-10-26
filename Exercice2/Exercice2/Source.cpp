@@ -49,30 +49,24 @@ int main()
 	}
 	*/
 
-
-
 	RedBlackTree<int> rbtree = RedBlackTree<int>();
 	
-	rbtree.addKey(1);
-	rbtree.addKey(2);
-	rbtree.addKey(5);
-	rbtree.addKey(7);
-	rbtree.addKey(8);
-	rbtree.addKey(11);
-	rbtree.addKey(14);
-	rbtree.addKey(15);
-	rbtree.addKey(4);
 	
-	cout << rbtree.findKey(1)->getColor() << endl;
-	cout << rbtree.findKey(2)->getColor() << endl;
-	cout << rbtree.findKey(5)->getColor() << endl;
-	cout << rbtree.findKey(7)->getColor() << endl;
-	cout << rbtree.findKey(8)->getColor() << endl;
-	cout << rbtree.findKey(11)->getColor() << endl;
-	cout << rbtree.findKey(14)->getColor() << endl;
-	cout << rbtree.findKey(15)->getColor() << endl;
-	cout << rbtree.findKey(4)->getColor() << endl;
+	rbtree.addKey(04);
+	rbtree.addKey(35);
+	rbtree.addKey(10);
+	rbtree.addKey(13);
+	rbtree.addKey(03);
+	rbtree.addKey(30);
+	rbtree.addKey(15);
+	rbtree.addKey(12);
+	rbtree.addKey(07);
+	rbtree.addKey(40);
+	rbtree.addKey(20);
+	rbtree.addKey(11);
+	rbtree.addKey(06);
 
+	
 	system("pause");
 	return 0;
 }

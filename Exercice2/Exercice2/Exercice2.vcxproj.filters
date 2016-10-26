@@ -21,10 +21,10 @@
     <ClCompile Include="Lego.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Node.cpp">
+    <ClCompile Include="LegoParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LegoParser.cpp">
+    <ClCompile Include="RedBlackNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -40,13 +40,16 @@
     <ClInclude Include="Lego.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Tree234.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LegoParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RedBlackNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RedBlackTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
